@@ -1,0 +1,116 @@
+Iot Hub Demo
+
+For More information see [Connect your device to your IoT hub using .NET](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-getstarted)
+
+To complete demo, you need the following:
+
+* Visual Studio 2017.
+* An active Azure account. (If you don't have an account, you can create a [free account](http://azure.microsoft.com/pricing/free-trial/) in just a couple of minutes.)
+
+
+# Project
+
+git clone https://ericvzx12r.visualstudio.com/DefaultCollection/_git/IOT%20HUB
+
+Open the IotHubLab solution in VS 2017 and build it
+
+__SimulatedDevice__, 
+1. Connects to your to your IoT hub with the device identity, and sends a telemetry message (D2C) every second by using the AMQP protocol.
+2. Receives message from cloud (C2D)
+3. Response to Direct Method (writeLine)
+
+
+SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
+
+
+__CloudToDevice__
+1. Displays the telemetry sent by your device app (D2C)
+2. Send a message to the Device (D2C)
+3. Invoke a direct method (writeLine)
+
+CloudTodevice.Exe [IOT Hub ConnectionString] [DEVICEID]
+
+__PowershellCmdLet__, allows to create a device in your Iot Hub
+
+__DeploymentScript__, contains all necessaries Powershell scripts & ARM Template to set up the IOT Hub Resources in your Azure Subscription
+
+
+
+# Setup
+If you have not installed Azure PowerShell, see [How to install and configure Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/overview?view=azurermps-4.3.1).
+
+or access directly to the setup files:
+
+[Azure PowerShell 4.3.1 Installer](https://github.com/Azure/azure-powershell/releases/download/v4.3.1-August2017/azure-powershell.4.3.1.msi)
+
+[Gallery Module for ARM Cmdlets](https://www.powershellgallery.com/packages/AzureRM/4.3.1)
+
+
+If you have installed Azure PowerShell in the past but have not updated it recently, consider installing the latest version. You can update the version through the same method you used to install it. For example, if you used the Web Platform Installer, launch it again and look for an update.
+
+To check your version of the Azure Resources module, use the following cmdlet:
+
+
+Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
+
+# Create Azure IOT Hub 
+
+Open a Powershell console in admin mode
+
+go to the DeploymentScript folder, and enter the following command:
+
+__.\StartDeployment.ps1__
+
+And fill the parameters:
+
+_deployedCustomPowershell:_ O (O character) 
+
+This parameter allows to set up the custom powershell command (PowershellCmdlet)
+
+__Note:__ If you stay in the current powershell session the next time you execute the StartDeployment.ps1 script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. 
+The custom powershell set up must display the following message:
+
+| Name        | PSVersion           | Description  |
+| ------------- |:-------------:| -----:|
+| CreateIotHubDevice     | 5.1| This CmdLet allow to create an IOTHub device |
+
+
+
+
+_Login:_ O (O character) 
+
+__Note:__ If you stay in the current powershell session the next time you execute the StartDeployment.ps1 script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
+
+_deploymentName:_ [YOUR IOT HUB NAME DEPLOYMENT]
+
+
+The set up start and do the following tasks:
+1. Install the custom Powershell command (see SetupCustomPowershellCmdlet.ps1 script)
+2. Log in with your azure credential (see Login.ps1 script)
+3. Create an Azure Resource Group (see Step1InvokeArmTemplate.ps1 script)
+
+	New-AzureRmResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation 
+
+
+	__Note__: By default the name of the resource group is a composition of the [YOUR IOT HUB NAME DEPLOYMENT] and .rg extension and the location is __North Europe__ (near my home)
+4. Start the deployment to Azure using the __Step1template.json__ template
+
+	New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath;
+
+5. Create a device in the Iot Hub
+
+	Add-CreateIOTHubDevice -ConnectionString $connectionString  -Name $deviceId
+
+To test the solution launch the commands:
+
+SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
+
+CloudTodevice.Exe [IOT Hub ConnectionString] [DEVICEID]
+
+
+
+
+
+
+
+

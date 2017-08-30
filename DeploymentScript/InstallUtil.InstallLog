@@ -15,3 +15,17 @@ Le fichier se trouve à C:\Labs\IOT Hub\IOTHubLab\DeploymentScript\PowershellCmd
 La phase de restauration est terminée.
 
 L'installation traitée avec transaction est terminée.
+
+Exécution d'une installation traitée avec transaction.
+
+Début de la phase d'installation de l'installation.
+Consultez le contenu du fichier journal pour l'avancement de l'assembly C:\Labs\IOT HUB\DeploymentScript\PowershellCmdLet.dll.
+Le fichier se trouve à C:\Labs\IOT HUB\DeploymentScript\PowershellCmdLet.InstallLog.
+
+La phase d'installation est terminée et la phase de validation a commencé.
+Consultez le contenu du fichier journal pour l'avancement de l'assembly C:\Labs\IOT HUB\DeploymentScript\PowershellCmdLet.dll.
+Le fichier se trouve à C:\Labs\IOT HUB\DeploymentScript\PowershellCmdLet.InstallLog.
+
+La phase de validation est terminée.
+
+L'installation traitée avec transaction est terminée.
