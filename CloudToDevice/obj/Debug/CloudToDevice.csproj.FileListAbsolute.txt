@@ -30,3 +30,35 @@ C:\Labs\IOT Hub\IOTHubLab\CloudToDevice\obj\Debug\CloudToDevice.csprojResolveAss
 C:\Labs\IOT Hub\IOTHubLab\CloudToDevice\obj\Debug\CloudToDevice.csproj.CoreCompileInputs.cache
 C:\Labs\IOT Hub\IOTHubLab\CloudToDevice\obj\Debug\CloudToDevice.exe
 C:\Labs\IOT Hub\IOTHubLab\CloudToDevice\obj\Debug\CloudToDevice.pdb
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\CloudToDevice.exe.config
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\CloudToDevice.exe
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\CloudToDevice.pdb
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Microsoft.Azure.Amqp.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Microsoft.Azure.Devices.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Microsoft.Azure.Devices.Shared.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Microsoft.ServiceBus.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Newtonsoft.Json.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PCLCrypto.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.BCrypt.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.Kernel32.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.NCrypt.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.Windows.Core.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\System.Net.Http.Formatting.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\System.Web.Http.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Validation.dll
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Microsoft.Azure.Amqp.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Microsoft.Azure.Devices.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Microsoft.ServiceBus.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Newtonsoft.Json.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PCLCrypto.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.BCrypt.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.Kernel32.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.NCrypt.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\PInvoke.Windows.Core.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\System.Net.Http.Formatting.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\System.Web.Http.xml
+C:\repos\IOTHUB\CloudToDevice\bin\Debug\Validation.xml
+C:\repos\IOTHUB\CloudToDevice\obj\Debug\CloudToDevice.csprojResolveAssemblyReference.cache
+C:\repos\IOTHUB\CloudToDevice\obj\Debug\CloudToDevice.csproj.CoreCompileInputs.cache
+C:\repos\IOTHUB\CloudToDevice\obj\Debug\CloudToDevice.exe
+C:\repos\IOTHUB\CloudToDevice\obj\Debug\CloudToDevice.pdb

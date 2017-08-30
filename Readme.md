@@ -2,7 +2,7 @@ Iot Hub Demo
 
 For More information see [Connect your device to your IoT hub using .NET](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-getstarted)
 
-To complete demo, you need the following:
+To complete the demo, you need the following:
 
 * Visual Studio 2017.
 * An active Azure account. (If you don't have an account, you can create a [free account](http://azure.microsoft.com/pricing/free-trial/) in just a couple of minutes.)
@@ -10,7 +10,9 @@ To complete demo, you need the following:
 
 # Project
 
-git clone https://ericvzx12r.visualstudio.com/DefaultCollection/_git/IOT%20HUB
+after cloning the project
+
+git clone https://github.com/EricVernie/IOTHUB.git
 
 Open the IotHubLab solution in VS 2017 and build it
 
@@ -20,7 +22,6 @@ __SimulatedDevice__,
 3. Response to Direct Method (writeLine)
 
 
-SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
 
 
 __CloudToDevice__
@@ -28,11 +29,10 @@ __CloudToDevice__
 2. Send a message to the Device (D2C)
 3. Invoke a direct method (writeLine)
 
-CloudTodevice.Exe [IOT Hub ConnectionString] [DEVICEID]
 
 __PowershellCmdLet__, allows to create a device in your Iot Hub
 
-__DeploymentScript__, contains all necessaries Powershell scripts & ARM Template to set up the IOT Hub Resources in your Azure Subscription
+__DeploymentScript__, contains all necessaries Powershell scripts & ARM Templates to set up the IOT Hub Resources in your Azure Subscription
 
 
 
@@ -55,11 +55,14 @@ Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
 
 # Create Azure IOT Hub 
 
-Open a Powershell console in admin mode
+* Open a Powershell console in admin mode
 
-go to the DeploymentScript folder, and enter the following command:
+* Go to the __DeploymentScript__ folder, and enter the following command:
+  __.\StartDeployment.ps1__
 
-__.\StartDeployment.ps1__
+    or
+
+    __.\StartDeployment.ps1__ deployedCustomPowershell O Login O 
 
 And fill the parameters:
 
@@ -85,9 +88,9 @@ _deploymentName:_ [YOUR IOT HUB NAME DEPLOYMENT]
 
 
 The set up start and do the following tasks:
-1. Install the custom Powershell command (see SetupCustomPowershellCmdlet.ps1 script)
-2. Log in with your azure credential (see Login.ps1 script)
-3. Create an Azure Resource Group (see Step1InvokeArmTemplate.ps1 script)
+1. Install the custom Powershell command (see __SetupCustomPowershellCmdlet.ps1__ script)
+2. Log in with your azure credential (see __Login.ps1__ script)
+3. Create an Azure Resource Group (see __Step1InvokeArmTemplate.ps1__ script)
 
 	New-AzureRmResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation 
 
@@ -101,12 +104,17 @@ The set up start and do the following tasks:
 
 	Add-CreateIOTHubDevice -ConnectionString $connectionString  -Name $deviceId
 
-To test the solution launch the commands:
+To test the solution launch the console Apps:
 
 SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
 
 CloudTodevice.Exe [IOT Hub ConnectionString] [DEVICEID]
 
+To delete the IOT HUB launch the script: 
+
+.\Clean.ps1 [RESOURCE GROUP NAME]
+
+__Remarks__: The template use as a pricing and scale tier 'free' and 'F1' which allows only __1 unit__. So you can create only 1 IOT Hub
 
 
 

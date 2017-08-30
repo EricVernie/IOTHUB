@@ -5,7 +5,11 @@ param(
 	
 	[Parameter(Mandatory=$True)]
     [string]	
-    $Login
+    $Login,
+
+	[Parameter(Mandatory=$True)]
+    [string]	
+    $deploymentName
 
 	)
 	.\ChangePrompt.ps1
@@ -23,10 +27,10 @@ param(
 			{
 				.\Login.ps1
 			}	
-			.\Step1InvokeArmTemplate.ps1
+			.\Step1InvokeArmTemplate.ps1 $deploymentName
 	}
 	catch
 	{
-		.\ErrorHelper.ps1   $($_.Exception.Source)	 $($_.Exception.Message)	
+		.\ErrorHelper.ps1   "Startdeployment.ps1"	 $($_.Exception.Message)	
 	}
 

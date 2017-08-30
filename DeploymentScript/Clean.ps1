@@ -3,15 +3,15 @@ param(
     [string]
     $resourceGroupName,
 	[Parameter(Mandatory=$True)]
-    [boolean]	
+    [string]	
     $Login
 	)
 Disable-AzureDataCollection
 
-if($Login)
-	{
-		.\Login.ps1
-	}	
+if($Login.ToUpper() -eq "O")
+			{
+				.\Login.ps1
+			}	
 
 
 Write-Host "Removing Resource Group"

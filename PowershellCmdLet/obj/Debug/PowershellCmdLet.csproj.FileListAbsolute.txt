@@ -32,3 +32,9 @@ C:\Labs\IOT Hub\IOTHubLab\PowershellCmdLet\obj\Debug\PowershellCmdLet.csprojReso
 C:\Labs\IOT Hub\IOTHubLab\PowershellCmdLet\obj\Debug\PowershellCmdLet.csproj.CoreCompileInputs.cache
 C:\Labs\IOT Hub\IOTHubLab\PowershellCmdLet\obj\Debug\PowershellCmdLet.dll
 C:\Labs\IOT Hub\IOTHubLab\PowershellCmdLet\obj\Debug\PowershellCmdLet.pdb
+C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.pdb
+C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.csprojResolveAssemblyReference.cache
+C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.csproj.CoreCompileInputs.cache
+C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.dll
+C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.pdb
