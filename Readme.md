@@ -1,4 +1,11 @@
-Iot Hub Demo
+# Iot Hub Demo
+
+The purpose of this demo, is to provide all the necessaries elements in order to:
+1. The creation of the IOT Hub with template ARM and Powershell cmdlet
+2. Simulate a device which send telemetry to the cloud (D2C)
+3. Read the telemetry from the Device
+4. Send message to the device (C2D)
+5. Invoke direct method
 
 For More information see [Connect your device to your IoT hub using .NET](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-getstarted)
 
