@@ -24,16 +24,16 @@ git clone https://github.com/EricVernie/IOTHUB.git
 Open the IotHubLab solution in VS 2017 and build it
 
 __SimulatedDevice__, 
-1. Connects to your to your IoT hub with the device identity, and sends a telemetry message (D2C) every second by using the AMQP protocol.
-2. Receives message from cloud (C2D)
+1. Connects to your to your IoT hub with the device identity, and sends a telemetry message every second by using the AMQP protocol.
+2. Receives message from cloud
 3. Response to Direct Method (writeLine)
 
 
 
 
 __CloudToDevice__
-1. Displays the telemetry sent by your device app (D2C)
-2. Send a message to the Device (D2C)
+1. Displays the telemetry sent by your device app
+2. Send a message to the Device
 3. Invoke a direct method (writeLine)
 
 
