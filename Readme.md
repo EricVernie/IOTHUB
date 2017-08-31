@@ -1,6 +1,8 @@
 # Iot Hub Demo
 
 The purpose of this demo, is to provide all the necessaries elements in order to:
+__Step1__
+
 1. Create the IOT Hub with template ARM and Powershell cmdlet
 2. Simulate a device which send telemetry to the cloud (D2C)
 3. Read the telemetry from the Device
@@ -8,6 +10,9 @@ The purpose of this demo, is to provide all the necessaries elements in order to
 5. Invoke direct method
 
 For More information see [Connect your device to your IoT hub using .NET](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-getstarted)
+
+__Step2__
+1. Future
 
 To complete the demo, you need the following:
 
@@ -58,68 +63,100 @@ If you have installed Azure PowerShell in the past but have not updated it recen
 
 To check your version of the Azure Resources module, use the following cmdlet:
 
-
-Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
+```json
+PS:> Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
+```
 
 # Create an Azure IOT Hub 
 
 * Open a Powershell console in admin mode
 
 * Go to the __DeploymentScript__ folder, and enter the following command:
-  __.\StartDeployment.ps1__
+```json
+PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -DeploymentName [YOUR IOT HUB NAME DEPLOYMENT]
+```
 
+| Parameters | Value | Description|
+| ------------- |:-------------:| -----:|
+| Step | StepX | This parameter Launch the appropriate ARM Template|
+| DeployedCustomPowershell | O or N | This parameter allows to set up the custom powershell command (PowershellCmdlet). __Note:__ If you stay in the current powershell session the next time you execute the script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. |
+|Login | O or N | Allows to sign in to your Azure Subscription. __Note:__ If you stay in the current powershell session the next time you execute the script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
+|DeploymentName|[YOUR IOT HUB NAME DEPLOYMENT]||
+	
 
-	And fill the parameters:
-
-	_deployedCustomPowershell:_ O (O character) 
-
-	This parameter allows to set up the custom powershell command (PowershellCmdlet)
-
-	__Note:__ If you stay in the current powershell session the next time you execute the __StartDeployment.ps1__ script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. 
-	The custom powershell set up must display the following message:
-
-	| Name        | PSVersion           | Description  |
-	| ------------- |:-------------:| -----:|
-	| CreateIotHubDevice     | 5.1| This CmdLet allow to create an IOTHub device |
-
-
-
-
-	_Login:_ O (O character) 
-
-	__Note:__ If you stay in the current powershell session the next time you execute the StartDeployment.ps1 script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
-
-	_deploymentName:_ [YOUR IOT HUB NAME DEPLOYMENT]
 
 
 The set up start and do the following tasks:
-1. Install the custom Powershell command (see __SetupCustomPowershellCmdlet.ps1__ script)
-2. Log in with your azure credential (see __Login.ps1__ script)
-3. Create an Azure Resource Group (see __Step1InvokeArmTemplate.ps1__ script)
-
+1. Installs the custom Powershell command (see __SetupCustomPowershellCmdlet.ps1__ script)
+2. Logs in with your azure credential (see __Login.ps1__ script)
+3. Creates an Azure Resource Group (see __StepXInvokeArmTemplate.ps1__ script)
+   
+```json
 	New-AzureRmResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation 
+```
+
+__Note__: By default the name of the resource group is a composition of [YOUR IOT HUB NAME DEPLOYMENT] and .rg extension and the location is __North Europe__ (near my home)
 
 
-	__Note__: By default the name of the resource group is a composition of the [YOUR IOT HUB NAME DEPLOYMENT] and .rg extension and the location is __North Europe__ (near my home)
-4. Start the deployment to Azure using the __Step1template.json__ template
-
+4. Start the deployment to Azure using the __StepXtemplate.json__ template
+	```json
 	New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath;
-
-5. Create a device in the Iot Hub
-
+	```
+5. Create a device in the Iot Hub (Custom Powershell CmdLet)
+    ```json
 	Add-CreateIOTHubDevice -ConnectionString $connectionString  -Name $deviceId
-
+	```
+## Test Step1
 To test the solution launch the console Apps:
 
-SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
+Sending telemetry
+```json
+PS:> .\SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
+```
 
-CloudTodevice.Exe [IOT Hub ConnectionString] [DEVICEID]
+Receive telemetry
+```json
+PS:>.\CloudToDevice.Exe [IOT Hub ConnectionString] [DEVICEID]
+```
 
-To delete the IOT HUB launch the script: 
+__Note__: You can send a message or Invoke a method to the device entering 's' or 'i' characters in the CloudToDevice console App
 
-.\Clean.ps1 [RESOURCE GROUP NAME]
+You can also use the [Azure Portal](https://portal.azure.com) in order to send a message to the device or invoke a direct method.
 
-__Remarks__: The template use as a pricing and scale tier 'free' and 'F1' which allows only __1 unit__. So you can create only 1 IOT Hub
+* Sign in to the Azure Portal [Azure Portal](https://portal.azure.com)
+* Select the Resource Group
+* Select the IOT Hub resource
+* Select Device Explorer
+* Select the Device ID (i.e Device42 for example)
+
+Send a message
+
+* Click on __Message to Device__
+* In the __Message Body__ enter your message
+* then click on __Send the Message__
+* Checked in the SimulatedDevice app console that your message is displayed
+
+Invoke a method
+
+* Click on __Direct Method__
+* In the __Method Name __ box enter writeLine
+* In the __Payload__ box enter 'Your message to print'
+* Then click on __Invoke Method__
+* Checked if the SimulatedDevice correclty call the writeLine method displaying the Payload to the console.
+
+To delete the IOT HUB execute the script: 
+```json
+PS:>.\Clean.ps1 [RESOURCE GROUP NAME]
+```
+
+__Remarks__: The template use as a pricing and scale tier 'free' and 'F1' which allows only __1 unit__. So you can create only 1 IOT Hub.
+If you want to have more than one IOT Hub resources, edit the template.json and change the following in the resources section:
+```json
+"sku": {
+        "name": "S1",
+        "tier": "Standard",
+        "capacity": 200
+      },
 
 
 

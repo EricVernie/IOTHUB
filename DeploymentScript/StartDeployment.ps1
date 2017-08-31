@@ -1,7 +1,10 @@
 param(
 	[Parameter(Mandatory=$True)]
     [string]	
-    $deployedCustomPowershell,
+    $Step,
+	[Parameter(Mandatory=$True)]
+    [string]	
+    $DeployedCustomPowershell,
 	
 	[Parameter(Mandatory=$True)]
     [string]	
@@ -9,15 +12,15 @@ param(
 
 	[Parameter(Mandatory=$True)]
     [string]	
-    $deploymentName
+    $DeploymentName
 
 	)
 	.\ChangePrompt.ps1
 	try
 	{
 		#First Setup the custom Powershell command if not already
-		Write-Host $deployedCustomPowershell
-		if ($deployedCustomPowershell.ToUpper() -eq "O")
+		Write-Host $DeployedCustomPowershell
+		if ($DeployedCustomPowershell.ToUpper() -eq "O")
 		{
 		Write-Host "Installing Custom Powershell CmdLet"
 			.\SetupCustomPowershellCmdlet.ps1
@@ -27,7 +30,15 @@ param(
 			{
 				.\Login.ps1
 			}	
-			.\Step1InvokeArmTemplate.ps1 $deploymentName
+			
+			if ($Step.ToUpper() -eq "STEP1")
+				{
+					.\Step1InvokeArmTemplate.ps1 $DeploymentName
+				}
+			else
+				{
+					Write-Host "Unknow script !!"
+				}
 	}
 	catch
 	{

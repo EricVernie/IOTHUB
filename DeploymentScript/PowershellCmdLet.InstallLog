@@ -41,3 +41,13 @@ Les paramètres affectés sont :
    logtoconsole = 
    assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
    logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Installation de l'assembly 'E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Validation de l'assembly 'E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog

@@ -58,7 +58,7 @@ param(
    $resourceGroup = Get-AzureRmResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue
    if(!$resourceGroup)
    {
-       Write-Host "Resource group '$resourceGroupName' does not exist. To create a new resource group, please enter a location.";
+       Write-Host "Resource group '$resourceGroupName' does not exist. Create a new resource group, location: '$Location'";
        if(!$resourceGroupLocation) {
            $resourceGroupLocation = Read-Host "resourceGroupLocation";
        }
@@ -94,5 +94,5 @@ param(
    Write-Host "IOT Hub ConnectionString: "  $connectionString
    Write-Host "Device PrimaryKey: "   $deviceInfo.Authentication.SymmetricKey.PrimaryKey   
    
-   Write-Host "To simulate a Device execute the following command: .\SimulatedDevice.exe " $iothubName  $deviceInfo.Authentication.SymmetricKey.PrimaryKey $deviceId  
-   Write-Host "Execute the following command to capture the message from a Device .\CloudTodevice.Exe" $connectionString  $deviceId 
+   Write-Host "To simulate a Device execute the following command: .\SimulatedDevice.exe '$iothubName' '$deviceInfo.Authentication.SymmetricKey.PrimaryKey' '$deviceId'"
+   Write-Host "Execute the following command to capture the message from a Device .\CloudTodevice.Exe '$connectionString'  '$deviceId'"

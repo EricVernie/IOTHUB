@@ -38,3 +38,8 @@ C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.csprojResolveAssembl
 C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.csproj.CoreCompileInputs.cache
 C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.dll
 C:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.pdb
+E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+E:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.pdb
+E:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.csprojResolveAssemblyReference.cache
+E:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.dll
+E:\repos\IOTHUB\PowershellCmdLet\obj\Debug\PowershellCmdLet.pdb
