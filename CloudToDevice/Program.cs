@@ -18,11 +18,12 @@ namespace ReadDeviceToCloudMessages
         static FeedbackReceiver<FeedbackBatch> _feedBackReceiver;
         static CloudToDeviceMethod _cloudToDeviceMethod;
         static string _deviceId;
+        static string _consumerGroup=null;
         static void Main(string[] args)
         {
-            if (args[0].ToLower().Equals("help"))
+            if (args.Length <=1 || args[0].ToLower().Equals("help"))
             {
-                Console.WriteLine("arguments: IOTHubConnectionString deviceId");
+                Console.WriteLine("arguments: IOTHubConnectionString DeviceId ConsumerGroup (Optional");
                 return;
             }
            
@@ -30,8 +31,12 @@ namespace ReadDeviceToCloudMessages
             Console.WriteLine("CTRL-C : exit.");
             Console.WriteLine("s : Send a message to device.");
             Console.WriteLine("i : Invoke a method.\n");
-            _connectionString = args[0]; //$"HostName={args[1]}.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey={args[0]}";
+            _connectionString = args[0]; 
             _deviceId = args[1];
+            if (args.Length == 3)
+            {
+                _consumerGroup = args[2];
+            }
             _eventHubClient = EventHubClient.CreateFromConnectionString(_connectionString, _iotHubD2cEndpoint);
             _serviceClient = ServiceClient.CreateFromConnectionString(_connectionString);
             var d2cPartitions = _eventHubClient.GetRuntimeInformation().PartitionIds;
@@ -119,23 +124,41 @@ namespace ReadDeviceToCloudMessages
         }
         private static async Task ReceiveMessagesFromDeviceAsync(string partition, CancellationToken ct)
         {
-            //var eventHubReceiver = await _eventHubClient.GetConsumerGroup("evtutoiothubconsumergroupwebapp").CreateReceiverAsync(partition, DateTime.UtcNow);
-            var eventHubReceiver  = _eventHubClient.GetDefaultConsumerGroup().CreateReceiver(partition, DateTime.UtcNow);
+            try
+            {
+                EventHubConsumerGroup currentConsumerGroup = null;
+                if (string.IsNullOrEmpty(_consumerGroup))
+                {
+                    currentConsumerGroup = _eventHubClient.GetDefaultConsumerGroup();
+                }
+                else
+                {
+                    currentConsumerGroup = _eventHubClient.GetConsumerGroup(_consumerGroup);
+                }
+                var eventHubReceiver = await currentConsumerGroup.CreateReceiverAsync(partition, DateTime.UtcNow);
 
-            while (true)
-            {                                
-                if (ct.IsCancellationRequested) break;
-                EventData eventData = await eventHubReceiver.ReceiveAsync();
-                if (eventData == null) continue;
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("#############Message Recu de l appareil#######################");
-                string data = Encoding.UTF8.GetString(eventData.GetBytes());
-                var alert = eventData.Properties["temperatureAlert"];
-                Console.WriteLine($"Alerte Temperature : {alert}");
-                Console.WriteLine("Message recu. Partition: {0} Data: '{1}'", partition, data);
-                Console.WriteLine("##############################################################");
-                Console.ResetColor();
+
+                while (true)
+                {
+                    if (ct.IsCancellationRequested) break;
+                    EventData eventData = await eventHubReceiver.ReceiveAsync();
+                    if (eventData == null) continue;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("#############Message Recu de l appareil#######################");
+                    string data = Encoding.UTF8.GetString(eventData.GetBytes());
+                    var alert = eventData.Properties["temperatureAlert"];
+                    Console.WriteLine($"Alerte Temperature : {alert}");
+                    Console.WriteLine("Message recu. Partition: {0} Data: '{1}'", partition, data);
+                    Console.WriteLine("##############################################################");
+                    Console.ResetColor();
+                }
             }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }

@@ -14,17 +14,18 @@ namespace SimulatedDevice
         static string _deviceId;
         static void Main(string[] args)
         {
-            if (args[0].ToLower().Equals("help"))
+            if (args.Length <= 1 || args[0].ToLower().Equals("help"))
             {
-                Console.WriteLine("arguments: IOTHubName PrimaryKey DeviceId");
+                Console.WriteLine("arguments: IOTHubName DevicePrimaryKey DeviceId");
                 return;
             }
-            string deviceKey = args[1];
-            _deviceId = args[2];
-            string iotHubUri =$"{args[0]}.azure-devices.net";
+            
             
             try
             {
+                string deviceKey = args[1];
+                _deviceId = args[2];
+                string iotHubUri = $"{args[0]}.azure-devices.net";
                 Console.ForegroundColor = ConsoleColor.Green;
                 _deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(_deviceId, deviceKey), TransportType.Amqp);
 

@@ -11,19 +11,14 @@ param(
     [string]
     $resourceGroupLocation="North Europe",
    
-	#[Parameter(Mandatory=$True)]
-	#[string]
-	#$iothubName,
 
 	#[Parameter(Mandatory=$True)]
 	[string]
 	$deviceId="Device42",
 
     [string]
-    $templateFilePath = "Step1template.json",
-   
-    [string]
-    $parametersFilePath = "Step1parameters.json"
+    $templateFilePath = "Step1template.json"
+     
    )
 
     <#
@@ -39,12 +34,7 @@ param(
        Register-AzureRmResourceProvider -ProviderNamespace $ResourceProviderNamespace;
    }
    
-   #******************************************************************************
-   # Script body
-   # Execution begins here
-   #******************************************************************************
-   $ErrorActionPreference = "Stop";
-
+  
    # Register RPs
    $resourceProviders = @("microsoft.devices");
    if($resourceProviders.length) {
@@ -71,13 +61,12 @@ param(
    
    # Start the deployment using template
    Write-Host "Starting deployment...";
-  
-		   #if(Test-Path $parametersFilePath) {
-	   #    New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath -TemplateParameterFile $parametersFilePath;
-	   #} else {
+  		
 		 $IotHubNameInfo=  New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath;
-	   #}
-  #Get the IOTHubName  From the deployment OutPut
+	   
+  
+		 
+   #Get the IOTHubName  From the deployment OutPut
    $iothubName=$IotHubNameInfo.Outputs["outputIotHubName"].Value;
 
    #Get IOT HUb PrimaryKey

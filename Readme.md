@@ -4,6 +4,8 @@ The purpose of this demo, is to provide all the necessaries elements in order to
 
 __Step1__
 
+Simulate de vice on your PC
+
 1. Create the IOT Hub with template ARM and Powershell cmdlet
 2. Simulate a device which send telemetry to the cloud (D2C)
 3. Read the telemetry from the Device
@@ -79,7 +81,7 @@ PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -Dep
 
 | Parameters | Value | Description|
 | ------------- |:-------------:| -----:|
-| Step | StepX | This parameter Launch the appropriate ARM Template|
+| Step | StepX | This parameter use the appropriate ARM Template in order to create the resources|
 | DeployedCustomPowershell | O or N | This parameter allows to set up the custom powershell command (PowershellCmdlet). __Note:__ If you stay in the current powershell session the next time you execute the script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. |
 |Login | O or N | Allows to sign in to your Azure Subscription. __Note:__ If you stay in the current powershell session the next time you execute the script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
 |DeploymentName|[YOUR IOT HUB NAME DEPLOYMENT]||
@@ -88,9 +90,9 @@ PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -Dep
 
 
 The set up start and do the following tasks:
-1. Installs the custom Powershell command (see __SetupCustomPowershellCmdlet.ps1__ script)
-2. Logs in with your azure credential (see __Login.ps1__ script)
-3. Creates an Azure Resource Group (see __StepXInvokeArmTemplate.ps1__ script)
+1. Installs the custom Powershell command
+2. Logs in with your azure credential 
+3. Creates an Azure Resource Group
    
 ```json
 	New-AzureRmResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation 
@@ -140,7 +142,7 @@ Send a message
 Invoke a method
 
 * Click on __Direct Method__
-* In the __Method Name __ box enter writeLine
+* In the __Method Name__ box enter writeLine
 * In the __Payload__ box enter 'Your message to print'
 * Then click on __Invoke Method__
 * Checked if the SimulatedDevice correclty call the writeLine method displaying the Payload to the console.

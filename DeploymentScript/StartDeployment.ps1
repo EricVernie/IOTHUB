@@ -15,7 +15,7 @@ param(
     $DeploymentName
 
 	)
-	.\ChangePrompt.ps1
+	Invoke-Expression ".\ChangePrompt.ps1"
 	try
 	{
 		#First Setup the custom Powershell command if not already
@@ -23,22 +23,15 @@ param(
 		if ($DeployedCustomPowershell.ToUpper() -eq "O")
 		{
 		Write-Host "Installing Custom Powershell CmdLet"
-			.\SetupCustomPowershellCmdlet.ps1
+			Invoke-Expression ".\SetupCustomPowershellCmdlet.ps1"
 		}
 
 			if($Login.ToUpper() -eq "O")
 			{
-				.\Login.ps1
-			}	
+				Invoke-Expression ".\Login.ps1"
+			}						    
+			Invoke-Expression ".\InvokeArmTemplate.ps1 '$Step' '$DeploymentName'"
 			
-			if ($Step.ToUpper() -eq "STEP1")
-				{
-					.\Step1InvokeArmTemplate.ps1 $DeploymentName
-				}
-			else
-				{
-					Write-Host "Unknow script !!"
-				}
 	}
 	catch
 	{

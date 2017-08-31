@@ -10,7 +10,7 @@ Disable-AzureDataCollection
 
 if($Login.ToUpper() -eq "O")
 			{
-				.\Login.ps1
+				Invole-Expression ".\Login.ps1"
 			}	
 
 
