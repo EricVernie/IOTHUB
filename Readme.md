@@ -15,7 +15,9 @@ Simulate de vice on your PC
 For More information see [Connect your device to your IoT hub using .NET](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-getstarted)
 
 __Step2__
-1. Future
+1. In progress
+
+For More Information see [Save IoT hub messages that contain sensor data to your Azure table storage](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-store-data-in-azure-table-storage)
 
 To complete the demo, you need the following:
 
