@@ -15,31 +15,32 @@ To complete the demo, you need the following:
 * An active Azure account. (If you don't have an account, you can create a [free account](http://azure.microsoft.com/pricing/free-trial/) in just a couple of minutes.)
 
 
-# Project
+# Solution
 
-after cloning the project
+Clone the solution https://github.com/EricVernie/IOTHUB.git
 
-git clone https://github.com/EricVernie/IOTHUB.git
+Open the IotHubLab solution in VS 2017 and build it.
+You will find the following projects:
 
-Open the IotHubLab solution in VS 2017 and build it
-
-__SimulatedDevice__, 
+## SimulatedDevice 
 1. Connects to your to your IoT hub with the device identity, and sends a telemetry message every second by using the AMQP protocol.
 2. Receives message from cloud
-3. Response to Direct Method (writeLine)
+3. Responses to Direct Method (writeLine)
 
 
 
 
-__CloudToDevice__
+## CloudToDevice
 1. Displays the telemetry sent by your device app
-2. Send a message to the Device
-3. Invoke a direct method (writeLine)
+2. Sends a message to the Device
+3. Invokes a direct method (writeLine)
 
 
-__PowershellCmdLet__, allows to create a device in your Iot Hub
+## PowershellCmdLet
+* Allows to create a device in your Iot Hub
 
-__DeploymentScript__, contains all necessaries Powershell scripts & ARM Templates to set up the IOT Hub Resources in your Azure Subscription
+## DeploymentScript 
+* Contains all necessaries Powershell scripts & ARM Templates to set up the IOT Hub Resources in your Azure Subscription
 
 
 
@@ -60,38 +61,35 @@ To check your version of the Azure Resources module, use the following cmdlet:
 
 Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
 
-# Create Azure IOT Hub 
+# Create an Azure IOT Hub 
 
 * Open a Powershell console in admin mode
 
 * Go to the __DeploymentScript__ folder, and enter the following command:
   __.\StartDeployment.ps1__
 
-    or
 
-    __.\StartDeployment.ps1__ deployedCustomPowershell O Login O 
+	And fill the parameters:
 
-And fill the parameters:
+	_deployedCustomPowershell:_ O (O character) 
 
-_deployedCustomPowershell:_ O (O character) 
+	This parameter allows to set up the custom powershell command (PowershellCmdlet)
 
-This parameter allows to set up the custom powershell command (PowershellCmdlet)
+	__Note:__ If you stay in the current powershell session the next time you execute the __StartDeployment.ps1__ script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. 
+	The custom powershell set up must display the following message:
 
-__Note:__ If you stay in the current powershell session the next time you execute the StartDeployment.ps1 script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. 
-The custom powershell set up must display the following message:
-
-| Name        | PSVersion           | Description  |
-| ------------- |:-------------:| -----:|
-| CreateIotHubDevice     | 5.1| This CmdLet allow to create an IOTHub device |
+	| Name        | PSVersion           | Description  |
+	| ------------- |:-------------:| -----:|
+	| CreateIotHubDevice     | 5.1| This CmdLet allow to create an IOTHub device |
 
 
 
 
-_Login:_ O (O character) 
+	_Login:_ O (O character) 
 
-__Note:__ If you stay in the current powershell session the next time you execute the StartDeployment.ps1 script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
+	__Note:__ If you stay in the current powershell session the next time you execute the StartDeployment.ps1 script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
 
-_deploymentName:_ [YOUR IOT HUB NAME DEPLOYMENT]
+	_deploymentName:_ [YOUR IOT HUB NAME DEPLOYMENT]
 
 
 The set up start and do the following tasks:
