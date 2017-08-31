@@ -8,7 +8,7 @@
       "minLength": 3,
       "metadata": {
         "description": "Name of the IoT Hub instance to provision."
-      }
+      }      
     },
     "iotHubConsumerGroupName": {
       "type": "string",
@@ -20,24 +20,32 @@
     },
     "iothubNamePrefix": {
       "type": "string",
-      "maxLength": 11,
+      "maxLength": 30,
       "defaultValue": "iothub",
       "metadata": {
         "description": "The value to use for starting the iothub account name."
+      }
+    },
+    "storageNameForFunctionPrefix": {
+      "type": "string",
+      "maxLength": 30,
+      "defaultValue": "storagefunc",
+      "metadata": {
+        "description": "The value to use for starting the storage account name for the function."
       }
     }
   },
   "variables": {
     "iotHubName": "[concat(toLower(parameters('iothubNamePrefix')), uniqueString(resourceGroup().id))]",
+    "storageFunctionAccountName": "[concat(toLower(parameters('storageNameForFunctionPrefix')), uniqueString(resourceGroup().id))]",
     "VersionAPI": "2016-02-03"
   },
   "outputs": {
-    "OutputIotHubName": {
-      "type": "string",
-      "value": "[variables('iotHubName')]"
-    },
-    {
-      "OutputConsumerGroup": {
+      "outputIotHubName": {
+        "type": "string",
+        "value": "[variables('iotHubName')]"
+      },
+      "outputConsumerGroup": {
         "type": "string",
         "value": "[parameters('iotHubConsumerGroupName')]"
       }
@@ -46,14 +54,6 @@
       {
         "apiVersion": "[variables('VersionAPI')]",
         "name": "[concat(variables('iotHubName'), '/events/',parameters('iotHubConsumerGroupName'))]",
-        "type": "Microsoft.Devices/iotHubs/eventhubEndpoints/ConsumerGroups",
-        "dependsOn": [
-          "[concat('Microsoft.Devices/iothubs/',variables('iotHubName'))]"
-        ]
-      },
-      {
-        "apiVersion": "[variables('VersionAPI')]",
-        "name": "[concat(variables('iotHubName'), '/events/','Device424242')]",
         "type": "Microsoft.Devices/iotHubs/eventhubEndpoints/ConsumerGroups",
         "dependsOn": [
           "[concat('Microsoft.Devices/iothubs/',variables('iotHubName'))]"
@@ -143,6 +143,22 @@
           },
           "features": "None"
         },
+        "dependsOn": []
+      },
+      {
+        "comments": "Generalized from resource: '/subscriptions/9a96981c-4056-48b7-9301-7c2757548bcf/resourceGroups/step2usestorage-rg/providers/Microsoft.Storage/storageAccounts/stepdeuxiothubstorage'.",
+        "type": "Microsoft.Storage/storageAccounts",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "kind": "Storage",
+        "name": "[variables('storageFunctionAccountName')]",
+        "apiVersion": "2016-01-01",
+        "location": "[resourceGroup().location]",
+        "tags": {},
+        "scale": null,
+        "properties": {},
         "dependsOn": []
       }
     ]

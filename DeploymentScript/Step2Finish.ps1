@@ -14,8 +14,8 @@
 	#Get the IOTHubName From the deployment OutPut
 	$IotHubNameInfo= Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName
 	
-    $iothubName=$IotHubNameInfo.Outputs["OutputIotHubName"].Value;
-    $iothubConsumerGroup=$IotHubNameInfo.Outputs["OutputConsumerGroup"].Value
+    $iothubName=$IotHubNameInfo.Outputs["outputIotHubName"].Value;
+    $iothubConsumerGroup=$IotHubNameInfo.Outputs["outputConsumerGroup"].Value
 	#Get IOT Hub PrimaryKey
    $iothubinfo=Get-AzureRmIotHubKey -ResourceGroupName $resourceGroupName -Name $iothubName -KeyName "iothubowner"
 
