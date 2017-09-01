@@ -1,21 +1,21 @@
  param(    
 	[Parameter(Mandatory=$True)]
     [string]
-    $resourceGroupName,
+    $ResourceGroupName,
   
 	[Parameter(Mandatory=$True)]
     [string]
-    $resourceGroupLocation
+    $ResourceGroupLocation
    
    )
   #Create or check for existing resource group
-   $resourceGroup = Get-AzureRmResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue
+   $ResourceGroup = Get-AzureRmResourceGroup -Name $ResourceGroupName -ErrorAction SilentlyContinue
    if(!$resourceGroup)
    {
-       Write-Host "Resource group '$resourceGroupName' does not exist. Create a new resource group, location: '$resourceGroupLocation'";       
-       Write-Host "Creating resource group '$resourceGroupName' in location '$resourceGroupLocation'";
-       New-AzureRmResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation 
+       Write-Host "Resource group '$ResourceGroupName' does not exist. Create a new resource group, location: '$ResourceGroupLocation'";       
+       Write-Host "Creating resource group '$ResourceGroupName' in location '$ResourceGroupLocation'";
+       New-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation 
    }
    else{
-       Write-Host "Using existing resource group '$resourceGroupName'";
+       Write-Host "Using existing resource group '$ResourceGroupName'";
    }

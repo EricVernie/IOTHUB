@@ -37,8 +37,7 @@
   },
   "variables": {
     "iotHubName": "[concat(toLower(parameters('iothubNamePrefix')), uniqueString(resourceGroup().id))]",
-    "storageFunctionAccountName": "[concat(toLower(parameters('storageNameForFunctionPrefix')), uniqueString(resourceGroup().id))]",
-    "VersionAPI": "2016-02-03"
+    "storageFunctionAccountName": "[concat(toLower(parameters('storageNameForFunctionPrefix')), uniqueString(resourceGroup().id))]"    
   },
   "outputs": {
       "outputIotHubName": {
@@ -52,7 +51,7 @@
     },
     "resources": [
       {
-        "apiVersion": "[variables('VersionAPI')]",
+        "apiVersion": "2016-02-03",
         "name": "[concat(variables('iotHubName'), '/events/',parameters('iotHubConsumerGroupName'))]",
         "type": "Microsoft.Devices/iotHubs/eventhubEndpoints/ConsumerGroups",
         "dependsOn": [
@@ -68,7 +67,7 @@
           "capacity": 1
         },
         "name": "[variables('iotHubName')]",
-        "apiVersion": "[variables('VersionAPI')]",
+        "apiVersion": "2016-02-03",
         "location": "[resourceGroup().location]",
         "tags": {},
         "scale": null,

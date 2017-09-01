@@ -86,6 +86,7 @@ PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -Dep
 | Step | StepX | This parameter use the appropriate ARM Template in order to create the resources|
 | DeployedCustomPowershell | O or N | This parameter allows to set up the custom powershell command (PowershellCmdlet). __Note:__ If you stay in the current powershell session the next time you execute the script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. |
 |Login | O or N | Allows to sign in to your Azure Subscription. __Note:__ If you stay in the current powershell session the next time you execute the script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
+|RegisterResourceProvider | O or N | Register the Resource Providers
 |DeploymentName|[YOUR IOT HUB NAME DEPLOYMENT]||
 	
 

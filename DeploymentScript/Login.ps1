@@ -3,19 +3,19 @@
 	Write-Host "Logging in...";
 	try
 	{
-		$subscription=Login-AzureRmAccount;
-		if ($subscription)
+		$Subscription=Login-AzureRmAccount;
+		if ($Subscription)
 		{
-			$subscriptionId = $subscription.Context.Subscription.SubscriptionId;
+			$SubscriptionId = $Subscription.Context.Subscription.SubscriptionId;
 			# select subscription
-			if ($subscriptionId -eq $null)
+			if ($SubscriptionId -eq $null)
 			{				
 				throw [System.Exception] "It seems that you don't have any Azure subscription check it on the azure portal: https://portal.azure.com"
 			}
 			else
 			{
-				Write-Host "Selecting subscription '$subscriptionId'";
-				Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+				Write-Host "Selecting subscription '$SubscriptionId'";
+				Select-AzureRmSubscription -SubscriptionID $SubscriptionId;
 				Write-Host "Login succeeded"		
 			}
 			

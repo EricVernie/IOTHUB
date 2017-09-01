@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatedDevice", "SimulatedDevice\SimulatedDevice.csproj", "{4C0DBF3C-BB02-42B8-ADDA-56B4595D7A26}"
 EndProject
@@ -11,11 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowershellCmdLet", "Powersh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeploymentScript", "DeploymentScript", "{C4E57E2B-37C2-4734-9D94-42B82AE12213}"
 	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\AddDevice.ps1 = DeploymentScript\AddDevice.ps1
+		DeploymentScript\AddNewResourceGroupDeployment.ps1 = DeploymentScript\AddNewResourceGroupDeployment.ps1
 		DeploymentScript\ChangePrompt.ps1 = DeploymentScript\ChangePrompt.ps1
 		DeploymentScript\Clean.ps1 = DeploymentScript\Clean.ps1
 		DeploymentScript\CreateResourceGroup.ps1 = DeploymentScript\CreateResourceGroup.ps1
+		DeploymentScript\DisplayInfo.ps1 = DeploymentScript\DisplayInfo.ps1
 		DeploymentScript\ErrorHelper.ps1 = DeploymentScript\ErrorHelper.ps1
-		DeploymentScript\InvokeArmTemplate.ps1 = DeploymentScript\InvokeArmTemplate.ps1
+		IOTHubInfo.cs = IOTHubInfo.cs
 		DeploymentScript\Login.ps1 = DeploymentScript\Login.ps1
 		DeploymentScript\RegisterResources.ps1 = DeploymentScript\RegisterResources.ps1
 		DeploymentScript\SetupCustomPowershellCmdlet.ps1 = DeploymentScript\SetupCustomPowershellCmdlet.ps1
@@ -24,7 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeploymentScript", "Deploym
 		DeploymentScript\Step1template.json = DeploymentScript\Step1template.json
 		DeploymentScript\Step2Finish.ps1 = DeploymentScript\Step2Finish.ps1
 		DeploymentScript\Step2template.json = DeploymentScript\Step2template.json
-		t.json = t.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AA8AF3F-B1CA-4CE1-AA99-5E2715F0E0AA}"
@@ -55,7 +57,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0F214917-295E-424A-A7E8-009044DF43A6}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
+		SolutionGuid = {0F214917-295E-424A-A7E8-009044DF43A6}
 	EndGlobalSection
 EndGlobal

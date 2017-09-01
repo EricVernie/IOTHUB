@@ -9,6 +9,9 @@ param(
 	[Parameter(Mandatory=$True)]
     [string]	
     $Login,
+	[Parameter(Mandatory=$True)]
+    [string]	
+    $RegisterResourceProvider,
 
 	[Parameter(Mandatory=$True)]
     [string]	
@@ -29,8 +32,14 @@ param(
 			if($Login.ToUpper() -eq "O")
 			{
 				Invoke-Expression ".\Login.ps1"
-			}						    
-			Invoke-Expression ".\InvokeArmTemplate.ps1 '$Step' '$DeploymentName'"
+			}
+			if ($RegisterResourceProvider.ToUpper() -eq "O")
+			{
+				Invoke-Expression '.\RegisterResources.ps1'   
+			}
+			
+
+			Invoke-Expression ".\AddNewResourceGroupDeployment.ps1 '$Step' '$DeploymentName'"
 			
 	}
 	catch

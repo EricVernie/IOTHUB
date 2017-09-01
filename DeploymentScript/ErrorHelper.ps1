@@ -1,10 +1,10 @@
 param(
 	[Parameter(Mandatory=$True)]
 	[string]
-	$source,
+	$Dource,
 	[Parameter(Mandatory=$True)]
 	[string]
-	$message
+	$Message
 	)
     #Write-Host "From:" $source -ForegroundColor Red
-	Write-Host "Message:" $message -ForegroundColor Red
+	Write-Host "Message:" $Message -ForegroundColor Red

@@ -12,10 +12,10 @@
    }
 
     # Register RPs
-   $resourceProviders = @("microsoft.devices");
-   if($resourceProviders.length) {
+   $ResourceProviders = @("microsoft.devices");
+   if($ResourceProviders.length) {
        Write-Host "Registering resource providers"
-       foreach($resourceProvider in $resourceProviders) {
-           RegisterRP($resourceProvider);
+       foreach($ResourceProvider in $ResourceProviders) {
+           RegisterRP($ResourceProvider);
        }
    }
