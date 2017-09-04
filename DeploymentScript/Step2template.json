@@ -11,7 +11,7 @@
         }
       },
     "sitesFuncName": {
-      "defaultValue": "[concat('sitefunc',parameters('uniqueStringPostFix'))]",
+      "defaultValue": "[concat('func',parameters('uniqueStringPostFix'))]",
       "type": "string",
       "metadata": {
         "description": "Name of the sites function name."
@@ -78,7 +78,7 @@
   "outputs": {
     "outputSiteFuncName": {
       "type": "string",
-      "value": "[concat('sitefunc',parameters('uniqueStringPostFix'))]"
+      "value": "[concat('func',parameters('uniqueStringPostFix'))]"
     },
     "outputIotHubName": {
       "type": "string",
