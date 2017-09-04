@@ -5,16 +5,11 @@ param(
 	
 	[Parameter(Mandatory=$True)]
     [string]
-    $DeploymentName,
+    $ResourceGroupName,
    
 	[string]
     $TemplateFilePath=$Step +"template.json",
-	
-
-    [string]
-    $ResourceGroupName = $deploymentName+"-rg",
-   
-	
+		
     [string]
     $ResourceGroupLocation="North Europe",
    

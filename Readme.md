@@ -6,7 +6,7 @@ __Step1__
 
 Simulate de vice on your PC
 
-1. Create the IOT Hub with template ARM and Powershell cmdlet
+1. Create the IOT Hub with template ARM (__Step1template__.json) and Powershell cmdlet
 2. Simulate a device which send telemetry to the cloud (D2C)
 3. Read the telemetry from the Device
 4. Send message to the device (C2D)
@@ -15,7 +15,8 @@ Simulate de vice on your PC
 For More information see [Connect your device to your IoT hub using .NET](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-getstarted)
 
 __Step2__
-1. In progress
+1. All the Step1
+2. Create an Azure Storage (__Step2template.json__)
 
 For More Information see [Save IoT hub messages that contain sensor data to your Azure table storage](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-store-data-in-azure-table-storage)
 
@@ -78,7 +79,7 @@ PS:> Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
 
 * Go to the __DeploymentScript__ folder, and enter the following command:
 ```json
-PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -DeploymentName [YOUR IOT HUB NAME DEPLOYMENT]
+PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -RegisterResourceProvider O -ResourceGroupName [RESOURCE GROUP NAME IOT HUB NAME]
 ```
 
 | Parameters | Value | Description|
@@ -87,7 +88,7 @@ PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -Dep
 | DeployedCustomPowershell | O or N | This parameter allows to set up the custom powershell command (PowershellCmdlet). __Note:__ If you stay in the current powershell session the next time you execute the script, no need to install again the Powershell command, so, enter 'N' or whatever except 'O'. |
 |Login | O or N | Allows to sign in to your Azure Subscription. __Note:__ If you stay in the current powershell session the next time you execute the script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
 |RegisterResourceProvider | O or N | Register the Resource Providers
-|DeploymentName|[YOUR IOT HUB NAME DEPLOYMENT]||
+|ResourceGroupName|[YOUR RESOURCE GROUP NAME]||
 	
 
 

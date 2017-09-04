@@ -15,7 +15,7 @@ param(
 
 	[Parameter(Mandatory=$True)]
     [string]	
-    $DeploymentName
+    $ResourceGroupName
 
 	)
 	Invoke-Expression ".\ChangePrompt.ps1"
@@ -39,7 +39,7 @@ param(
 			}
 			
 
-			Invoke-Expression ".\AddNewResourceGroupDeployment.ps1 '$Step' '$DeploymentName'"
+			Invoke-Expression ".\AddNewResourceGroupDeployment.ps1 '$Step' '$ResourceGroupName'"
 			
 	}
 	catch
