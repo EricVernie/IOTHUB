@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunction", "AzureFunction", "{F8917DF3-3ABE-4816-BA53-023CC4E9444A}"
 	ProjectSection(SolutionItems) = preProject
-		Step2IotHubSaveMessageToStorage-func.js = Step2IotHubSaveMessageToStorage-func.js
+		AzureFunction\Step2SaveIotHubMessages-func\Step2IotHubSaveMessageToStorage-func.js = AzureFunction\Step2SaveIotHubMessages-func\Step2IotHubSaveMessageToStorage-func.js
 	EndProjectSection
 EndProject
 Global
