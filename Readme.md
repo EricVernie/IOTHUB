@@ -4,9 +4,9 @@ The purpose of this demo, is to provide all the necessaries elements in order to
 
 __Step1__
 
-Simulate de vice on your PC
+Simulate device on your PC 
 
-1. Create the IOT Hub with template ARM (__Step1template__.json) and Powershell cmdlet
+1. Create the IOT Hub with template ARM (__Step1template.json__) and Powershell cmdlet
 2. Simulate a device which send telemetry to the cloud (D2C)
 3. Read the telemetry from the Device
 4. Send message to the device (C2D)
@@ -15,12 +15,18 @@ Simulate de vice on your PC
 For More information see [Connect your device to your IoT hub using .NET](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-csharp-csharp-getstarted)
 
 __Step2__
-1. All the Step1
-2. Create an Azure Storage (__Step2template.json__)
+
+Store IOT Hub message to Azure Storage
+
+1. Create the IOT Hub with template ARM (__Step2template.json__) and Powershell cmdlet
+2. Create an Azure Storage in order to store messages from IOT Hub
+3. Create an Azure Function App (Site)
+4. Create a __function.json__ files allowing to bind the Iot Hub event endpoint and Azure Storage endpoint
+5. Deploy the function to the Function App
 
 For More Information see [Save IoT hub messages that contain sensor data to your Azure table storage](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-store-data-in-azure-table-storage)
 
-To complete the demo, you need the following:
+To complete the demos, you need the following:
 
 * Visual Studio 2017.
 * An active Azure account. (If you don't have an account, you can create a [free account](http://azure.microsoft.com/pricing/free-trial/) in just a couple of minutes.)
@@ -40,7 +46,6 @@ You will find the following projects:
 
 
 
-
 ## CloudToDevice
 1. Displays the telemetry sent by your device app
 2. Sends a message to the Device
@@ -53,6 +58,28 @@ You will find the following projects:
 ## DeploymentScript 
 * Contains all necessaries Powershell scripts & ARM Templates to set up the IOT Hub Resources in your Azure Subscription
 
+## AzureFunction
+
+* Includes the Azure Function code which store IotHub message to an Azure Storage
+    ```json
+    // JavaScript source code
+    'use strict';
+    // This function is triggered each time a message is received in the IoT hub.
+    // The message payload is persisted in an Azure storage table
+    
+    module.exports = function (context, iotHubMessage) {
+    context.log('Message received: ' + JSON.stringify(iotHubMessage));
+    var date = Date.now();
+    var partitionKey = Math.floor(date / (24 * 60 * 60 * 1000)) + '';
+    var rowKey = date + '';
+    context.bindings.outputTable = {
+     "partitionKey": partitionKey,
+     "rowKey": rowKey,
+     "message": JSON.stringify(iotHubMessage)
+    };
+    context.done();
+    };
+    ```
 
 
 # Setup
@@ -79,7 +106,12 @@ PS:> Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
 
 * Go to the __DeploymentScript__ folder, and enter the following command:
 ```json
+#Step1
 PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -RegisterResourceProvider O -ResourceGroupName [RESOURCE GROUP NAME IOT HUB NAME]
+
+#Step2
+PS:> .\StartDeployment.ps1 -Step Step2 -DeployedCustomPowershell O -Login O -RegisterResourceProvider O -ResourceGroupName [RESOURCE GROUP NAME IOT HUB NAME]
+
 ```
 
 | Parameters | Value | Description|
@@ -91,40 +123,19 @@ PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -Reg
 |ResourceGroupName|[YOUR RESOURCE GROUP NAME]||
 	
 
-
-
-The set up start and do the following tasks:
-1. Installs the custom Powershell command
-2. Logs in with your azure credential 
-3. Creates an Azure Resource Group
-   
-```json
-	New-AzureRmResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation 
-```
-
-__Note__: By default the name of the resource group is a composition of [YOUR IOT HUB NAME DEPLOYMENT] and .rg extension and the location is __North Europe__ (near my home)
-
-
-4. Start the deployment to Azure using the __StepXtemplate.json__ template
-	```json
-	New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath;
-	```
-5. Create a device in the Iot Hub (Custom Powershell CmdLet)
-    ```json
-	Add-CreateIOTHubDevice -ConnectionString $connectionString  -Name $deviceId
-	```
 ## Test Step1
-To test the solution launch the console Apps:
 
-Sending telemetry
+Launch the __SimulatedDevice__ console App to send telemetry
+
 ```json
 PS:> .\SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
 ```
+Launch __CloudToDevice__ console app to receive telemetry
 
-Receive telemetry
 ```json
 PS:>.\CloudToDevice.Exe [IOT Hub ConnectionString] [DEVICEID]
 ```
+
 
 __Note__: You can send a message or Invoke a method to the device entering 's' or 'i' characters in the CloudToDevice console App
 
@@ -149,9 +160,36 @@ Invoke a method
 * In the __Method Name__ box enter writeLine
 * In the __Payload__ box enter 'Your message to print'
 * Then click on __Invoke Method__
-* Checked if the SimulatedDevice correclty call the writeLine method displaying the Payload to the console.
+* Checked if the SimulatedDevice correctly called the __writeLine__ method displaying the Payload to the console.
 
-To delete the IOT HUB execute the script: 
+## Test Step2
+__Verify your message in your table storage__
+
+1. Launch the __SimulatedDevice__ console App to send telemetry
+```json
+PS:> .\SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
+```
+2. [Download and install Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/)
+3. Open Storage Explorer, click __Add an Azure Account > Sign in__, and then sign in to your Azure account.
+4. Click your Azure subscription > __Storage Accounts__ > your storage account > Tables > __deviceData__.
+
+You should see messages sent from your device to your IoT hub logged in the __deviceData__ table.
+
+You can also use the [Azure Portal](https://portal.azure.com) in order to invoke the azure function.
+
+* Sign in to the Azure Portal [Azure Portal](https://portal.azure.com)
+* Select the Resource Group
+* Select the Function App 
+* Select the __Step2CustomFunction__
+* At the right on the screen, select __test__
+* In the __Request body__ enter a message '_This is a message from Step2CustomFunction_'
+* Check in Azure Storage Explorer 
+  
+
+
+
+
+To delete the demo execute the script: 
 ```json
 PS:>.\Clean.ps1 [RESOURCE GROUP NAME]
 ```
