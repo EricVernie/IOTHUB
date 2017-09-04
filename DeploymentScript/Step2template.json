@@ -25,10 +25,10 @@
         "defaultValue": "[concat('plan',parameters('uniqueStringPostFix'))]",
         "type": "string"
       },
-      "hostNameBindings_func.azurewebsites.net_name": {
-        "defaultValue": "evtutoiothub-func.azurewebsites.net",
-        "type": "String"
-      },
+    "hostNameBindings_func.azurewebsites.net_name": {
+      "defaultValue": "[concat(variables('sitesFuncName'), '/', concat(variables('sitesFuncName'),'.azurewebsites.net'))]",
+      "type": "String"
+    },
       "IotHubs_evmsdntutoiothub_iothub_name": {
         "defaultValue": "evtutoiothub-iothub",
         "type": "string",
