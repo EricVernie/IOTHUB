@@ -1,0 +1,42 @@
+{
+
+  "bindings": [
+
+    {
+
+      "type": "eventHubTrigger",
+
+      "name": "eventHubMessages",
+
+      "direction": "in",
+
+      "path": "iothubifc7yjmd2serc",
+
+      "connection": "iothubifc7yjmd2serc_events_IOTHUB",
+
+      "cardinality": "many",
+
+      "consumerGroup": "ericvconsumergroup"
+
+    },
+
+    {
+
+      "type": "table",
+
+      "name": "outputTable",
+
+      "tableName": "deviceData",
+
+      "connection": "storagefuncifc7yjmd2serc_STORAGE",
+
+      "direction": "out"
+
+    }
+
+  ],
+
+  "disabled": false
+
+}
+

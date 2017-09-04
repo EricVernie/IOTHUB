@@ -25,10 +25,6 @@
         "defaultValue": "[concat('plan',parameters('uniqueStringPostFix'))]",
         "type": "string"
       },
-    "hostNameBindings_func.azurewebsites.net_name": {
-      "defaultValue": "[concat(variables('sitesFuncName'), '/', concat(variables('sitesFuncName'),'.azurewebsites.net'))]",
-      "type": "String"
-    },
       "IotHubs_evmsdntutoiothub_iothub_name": {
         "defaultValue": "evtutoiothub-iothub",
         "type": "string",
@@ -80,6 +76,10 @@
     "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageFunctionAccountName'))]"
   },
   "outputs": {
+    "outputSiteFuncName": {
+      "type": "string",
+      "value": "[concat('sitefunc',parameters('uniqueStringPostFix'))]"
+    },
     "outputIotHubName": {
       "type": "string",
       "value": "[variables('iotHubName')]"
@@ -88,15 +88,11 @@
       "type": "string",
       "value": "[parameters('iotHubConsumerGroupName')]"
     },
-    "outputSiteFuncName": {
-      "type": "string",
-      "value": "[variables('sitesFuncName')]"
-    },
     "outputIotHubEventConnectionString": {
       "type": "string",
       "value": "[concat('Endpoint=',reference(resourceId('Microsoft.Devices/IoTHubs',variables('iotHubName'))).eventHubEndpoints.events.endpoint,';SharedAccessKeyName=iothubowner;SharedAccessKey=',listKeys(resourceId('Microsoft.Devices/IotHubs',variables('iotHubName')),'2016-02-03').value[0].primaryKey)]"
     },
-    "iotHubInfo": {
+    "outputAlliotHubInfo": {
       "value": "[reference(resourceId('Microsoft.Devices/IoTHubs',variables('iotHubName')))]",
       "type": "object"
     }
@@ -296,7 +292,16 @@
             {
               "name": "FUNCTIONS_EXTENSION_VERSION",
               "value": "~1"
+            },
+            {
+              "name": "EVENTS_IOTHUB_CONNECTION_STRING",
+              "value": "[concat('Endpoint=',reference(resourceId('Microsoft.Devices/IoTHubs',variables('iotHubName'))).eventHubEndpoints.events.endpoint,';SharedAccessKeyName=iothubowner;SharedAccessKey=',listKeys(resourceId('Microsoft.Devices/IotHubs',variables('iotHubName')),'2016-02-03').value[0].primaryKey)]"
+            },
+            {
+              "name": "STORAGE__CONNECTION_STRING",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageFunctionAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
             }
+
           ]
         },
         "scmSiteAlsoStopped": false,

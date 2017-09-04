@@ -12,7 +12,7 @@
    }
 
     # Register RPs
-   $ResourceProviders = @("microsoft.devices");
+   $ResourceProviders = @("microsoft.devices","microsoft.storage","microsoft.web");
    if($ResourceProviders.length) {
        Write-Host "Registering resource providers"
        foreach($ResourceProvider in $ResourceProviders) {
