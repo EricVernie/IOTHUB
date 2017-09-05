@@ -1,0 +1,414 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "deployments_4b9c09be9bebf1bea8dac73bfd0e6cd9a37be9ea_name": {
+      "defaultValue": "4b9c09be9bebf1bea8dac73bfd0e6cd9a37be9ea",
+      "type": "string"
+    },
+    "uniqueStringPostFix": {
+      "type": "string",
+      "maxLength": 50,
+      "defaultValue": "[uniqueString(resourceGroup().id)]",
+      "metadata": {
+        "description": ""
+      }
+    },
+    "serverfarmsPlanName": {
+      "defaultValue": "[concat('plan',parameters('uniqueStringPostFix'))]",
+      "type": "string"
+    },
+    "IotHubs_evmsdntutoiothub_iothub_name": {
+      "defaultValue": "evtutoiothub-iothub",
+      "type": "string",
+      "minLength": 3,
+      "metadata": {
+        "description": "Name of the IoT Hub instance to provision."
+      }
+    },
+    "iotHubConsumerGroupName": {
+      "type": "string",
+      "minLength": 3,
+      "defaultValue": "ericvconsumergroup",
+      "metadata": {
+        "description": "Name of device-to-cloud consumer group to provision on the IoT Hub instance."
+      }
+    },
+    "iothubNamePrefix": {
+      "type": "string",
+      "maxLength": 30,
+      "defaultValue": "iothub",
+      "metadata": {
+        "description": "The value to use for starting the iothub account name."
+      }
+    },
+    "sites_webapptjaltnhvppgls_name": {
+      "defaultValue": "[concat('webapp',parameters('uniqueStringPostFix'))]",
+      "type": "string"
+    },
+    "config_web_name": {
+      "defaultValue": "web",
+      "type": "string"
+    },
+    "hostNameBindings_webapptjaltnhvppgls.azurewebsites.net_name": {
+      "defaultValue": "[concat(parameters('sites_webapptjaltnhvppgls_name'),'.azurewebsites.net')]",
+      "type": "string"
+    }
+  },
+  "variables": {
+    "iotHubName": "[concat(parameters('iothubNamePrefix'), parameters('uniqueStringPostFix'))]"
+  },
+  "outputs": {
+    "outputSiteFuncName": {
+      "type": "string",
+      "value": "[concat('func',parameters('uniqueStringPostFix'))]"
+    },
+    "outputIotHubName": {
+      "type": "string",
+      "value": "[variables('iotHubName')]"
+    },
+    "outputConsumerGroup": {
+      "type": "string",
+      "value": "[parameters('iotHubConsumerGroupName')]"
+    },
+    "outputIotHubEventConnectionString": {
+      "type": "string",
+      "value": "[concat('Endpoint=',reference(resourceId('Microsoft.Devices/IoTHubs',variables('iotHubName'))).eventHubEndpoints.events.endpoint,';SharedAccessKeyName=iothubowner;SharedAccessKey=',listKeys(resourceId('Microsoft.Devices/IotHubs',variables('iotHubName')),'2016-02-03').value[0].primaryKey)]"
+    }
+  },
+  "resources": [
+    {
+      "comments": "Creating an IOT Hub",
+      "type": "Microsoft.Devices/IotHubs",
+      "sku": {
+        "name": "S1",
+        "tier": "Standard",
+        "capacity": 200
+      },
+      "name": "[variables('iotHubName')]",
+      "apiVersion": "2016-02-03",
+      "location": "[resourceGroup().location]",
+      "tags": {},
+      "scale": null,
+      "properties": {
+        "operationsMonitoringProperties": {
+          "events": {
+            "None": "None",
+            "Connections": "None",
+            "DeviceTelemetry": "None",
+            "C2DCommands": "None",
+            "DeviceIdentityOperations": "None",
+            "FileUploadOperations": "None",
+            "Routes": "None"
+          }
+        },
+        "ipFilterRules": [],
+        "eventHubEndpoints": {
+          "events": {
+            "retentionTimeInDays": 1,
+            "partitionCount": 2,
+            "partitionIds": [
+              "0",
+              "1"
+            ],
+            "path": "iothub-ehub-evmsdntuto-208964-e574620478",
+            "endpoint": "sb://ihsuproddbres055dednamespace.servicebus.windows.net/"
+          },
+          "operationsMonitoringEvents": {
+            "retentionTimeInDays": 1,
+            "partitionCount": 2,
+            "partitionIds": [
+              "0",
+              "1"
+            ],
+            "path": "iothub-ehub-evmsdntuto-208964-64039c2463",
+            "endpoint": "sb://ihsuproddbres012dednamespace.servicebus.windows.net/"
+          }
+        },
+        "routing": {
+          "endpoints": {
+            "serviceBusQueues": [],
+            "serviceBusTopics": [],
+            "eventHubs": []
+          },
+          "routes": [],
+          "fallbackRoute": {
+            "name": "$fallback",
+            "source": "DeviceMessages",
+            "condition": "true",
+            "endpointNames": [
+              "events"
+            ],
+            "isEnabled": true
+          }
+        },
+        "storageEndpoints": {
+          "$default": {
+            "sasTtlAsIso8601": "PT1H",
+            "connectionString": "",
+            "containerName": ""
+          }
+        },
+        "enableFileUploadNotifications": false,
+        "cloudToDevice": {
+          "maxDeliveryCount": 10,
+          "defaultTtlAsIso8601": "PT1H",
+          "feedback": {
+            "lockDurationAsIso8601": "PT1M",
+            "ttlAsIso8601": "PT1H",
+            "maxDeliveryCount": 10
+          }
+        },
+        "features": "None"
+      },
+      "dependsOn": []
+    },
+    {
+      "comments": "Creating IOTHub event EndPoint consumer group",
+      "apiVersion": "2016-02-03",
+      "name": "[concat(variables('iotHubName'), '/events/',parameters('iotHubConsumerGroupName'))]",
+      "type": "Microsoft.Devices/iotHubs/eventhubEndpoints/ConsumerGroups",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Devices/iothubs/',variables('iotHubName'))]"
+      ]
+    },
+    {
+      "comments": "Creating plan",
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "F1",
+        "tier": "Free",
+        "size": "F1",
+        "family": "F",
+        "capacity": 0
+      },
+      "kind": "app",
+      "name": "[parameters('serverfarmsPlanName')]",
+      "apiVersion": "2016-09-01",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "name": "[parameters('serverfarmsPlanName')]",
+        "workerTierName": null,
+        "adminSiteName": null,
+        "hostingEnvironmentProfile": null,
+        "perSiteScaling": false,
+        "reserved": false,
+        "targetWorkerCount": 0,
+        "targetWorkerSizeId": 0
+      },
+      "dependsOn": []
+    },
+    {
+      "comments": "Create web site",
+      "type": "Microsoft.Web/sites",
+      "kind": "app",
+      "name": "[parameters('sites_webapptjaltnhvppgls_name')]",
+      "apiVersion": "2016-08-01",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "hidden-related:/subscriptions/9a96981c-4056-48b7-9301-7c2757548bcf/resourcegroups/Step3-IotHubDataViz-rg/providers/Microsoft.Web/serverfarms/plantjaltnhvppgls": "empty"
+      },
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'),'.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'),'.scm.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarmsPlanName'))]",
+        "reserved": false,
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "Azure.IoT.IoTHub.ConnectionString",
+              "value": "[concat('HostName=',variables('iotHubName'),'.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=',listKeys(resourceId('Microsoft.Devices/IotHubs',variables('iotHubName')),'2016-02-03').value[0].primaryKey)]"
+            },
+            {
+              "name": "Azure.IoT.IoTHub.ConsumerGroup",
+              "value": "[parameters('iotHubConsumerGroupName')]"
+            },
+            {
+              "name": "WEBSITE_NODE_DEFAULT_VERSION",
+              "value": "6.9.1"
+            }
+          ]
+        },
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": true,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarmsPlanName'))]"
+      ]
+    },
+    {
+      "comments": "Appsettings.",
+      "type": "Microsoft.Web/sites/config",
+      "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'), '/', parameters('config_web_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "hidden-related:/subscriptions/9a96981c-4056-48b7-9301-7c2757548bcf/resourcegroups/Step3-IotHubDataViz-rg/providers/Microsoft.Web/serverfarms/plantjaltnhvppgls": "empty"
+      },
+      "scale": null,
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php",
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "phpVersion": "5.6",
+        "pythonVersion": "",
+        "nodeVersion": "",
+        "linuxFxVersion": "",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "[concat('$', parameters('config_web_name'),'apptjaltnhvppgls')]",
+        "publishingPassword": null,
+        "appSettings": null,
+        "metadata": null,
+        "connectionStrings": null,
+        "machineKey": null,
+        "handlerMappings": null,
+        "documentRoot": null,
+        "scmType": "None",
+        "use32BitWorkerProcess": true,
+        "webSocketsEnabled": true,
+        "alwaysOn": false,
+        "javaVersion": null,
+        "javaContainer": null,
+        "javaContainerVersion": null,
+        "appCommandLine": "",
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false,
+            "virtualDirectories": null
+          }
+        ],
+        "winAuthAdminState": 0,
+        "winAuthTenantState": 0,
+        "customAppPoolIdentityAdminState": false,
+        "customAppPoolIdentityTenantState": false,
+        "runtimeADUser": null,
+        "runtimeADUserPassword": null,
+        "loadBalancing": "LeastRequests",
+        "routingRules": [],
+        "experiments": {
+          "rampUpRules": []
+        },
+        "limits": null,
+        "autoHealEnabled": false,
+        "autoHealRules": null,
+        "tracingOptions": null,
+        "vnetName": "",
+        "siteAuthEnabled": false,
+        "siteAuthSettings": {
+          "enabled": null,
+          "unauthenticatedClientAction": null,
+          "tokenStoreEnabled": null,
+          "allowedExternalRedirectUrls": null,
+          "defaultProvider": null,
+          "clientId": null,
+          "clientSecret": null,
+          "issuer": null,
+          "allowedAudiences": null,
+          "additionalLoginParams": null,
+          "isAadAutoProvisioned": false,
+          "googleClientId": null,
+          "googleClientSecret": null,
+          "googleOAuthScopes": null,
+          "facebookAppId": null,
+          "facebookAppSecret": null,
+          "facebookOAuthScopes": null,
+          "twitterConsumerKey": null,
+          "twitterConsumerSecret": null,
+          "microsoftAccountClientId": null,
+          "microsoftAccountClientSecret": null,
+          "microsoftAccountOAuthScopes": null
+        },
+        "cors": null,
+        "push": null,
+        "apiDefinition": null,
+        "autoSwapSlotName": null,
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": null
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_webapptjaltnhvppgls_name'))]"
+      ]
+    },
+    {
+      "comments": "Deployments",
+      "type": "Microsoft.Web/sites/deployments",
+      "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'), '/', parameters('deployments_4b9c09be9bebf1bea8dac73bfd0e6cd9a37be9ea_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "North Europe",
+      "scale": null,
+      "properties": {
+        "id": "[parameters('deployments_4b9c09be9bebf1bea8dac73bfd0e6cd9a37be9ea_name')]",
+        "status": 4,
+        "author_email": "yuwzho@microsoft.com",
+        "author": "Yuwei Zhou",
+        "deployer": "ericvernie",
+        "message": "upgrade azure package version and make humidity data unnecessary (#3)\n\n",
+        "start_time": "2017-09-05T19:13:37.3842483Z",
+        "end_time": "2017-09-05T19:14:03.0946956Z",
+        "active": true
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_webapptjaltnhvppgls_name'))]"
+      ]
+    },
+    {
+      "comments": "HostNameBindings",
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'), '/', parameters('hostNameBindings_webapptjaltnhvppgls.azurewebsites.net_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "[resourceGroup().location]",
+      "scale": null,
+      "properties": {
+        "siteName": "[parameters('sites_webapptjaltnhvppgls_name')]",
+        "domainId": null,
+        "hostNameType": "Verified"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_webapptjaltnhvppgls_name'))]"
+      ]
+    }
+  ]
+  }

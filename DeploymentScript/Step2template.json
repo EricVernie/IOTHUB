@@ -69,7 +69,6 @@
 
     },
   "variables": {
-
     "iotHubName": "[concat(parameters('iothubNamePrefix'), parameters('uniqueStringPostFix'))]",
     "storageFunctionAccountName": "[concat(parameters('storageNameForFunctionPrefix'), parameters('uniqueStringPostFix'))]",
     "sitesFuncName": "[concat(parameters('funcNamePrefix'),parameters('uniqueStringPostFix'))]",

@@ -25,7 +25,9 @@ param(
 	
 	   # Start the deployment using template
 	   Write-Host "Starting deployment...";  
-	   New-AzureRmResourceGroupDeployment -DeploymentDebugLogLevel All -ResourceGroupName $ResourceGroupName -TemplateFile $TemplateFilePath;		   
+	   
+	   New-AzureRmResourceGroupDeployment -DeploymentDebugLogLevel None -ResourceGroupName $ResourceGroupName -TemplateFile $TemplateFilePath;		   
+
 	   $StepFinish =".\"+$Step+"Finish.ps1 '$ResourceGroupName' '$DeviceId'"
 	   
 	   Invoke-Expression  $StepFinish 

@@ -1,0 +1,6 @@
+git clone https://github.com/Azure-Samples/web-apps-node-iot-hub-data-visualization.git
+cd .\web-apps-node-iot-hub-data-visualization\
+git remote add webapp https://ericvernie@webappfniihw3rxa4qu.scm.azurewebsites.net:443/webappfniihw3rxa4qu.git
+
+git push webapp master:master
+
