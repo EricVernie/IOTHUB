@@ -17,7 +17,9 @@
 	
 	$IotHubEventCompatibleEndPoint=$ResourceGroupeDeploymentOutPut.Outputs["outputIotHubEventConnectionString"].Value
 	$SiteFuncName = $ResourceGroupeDeploymentOutPut.Outputs["outputSiteFuncName"].Value
-	
+	$AzureFuncStorageName =$ResourceGroupeDeploymentOutPut.Outputs["outputAzureFuncStorageName"].Value
+	$StorageAccountKey =$ResourceGroupeDeploymentOutPut.Outputs["outputStorageAccountKey"].Value
+
 	#Get the events endPoint By Powershell (Obsolete see the outputs template to do that)
 	#$IotHubOutputInfo=$ResourceGroupeDeployment.Outputs["iotHubInfo"]
 	#$EventHubEndPoints=$IotHubOutputInfo.Value["eventHubEndpoints"]
@@ -31,6 +33,11 @@
     $DevicePrimaryKey =$IotHubInfo.DevicePrimaryKey
     $ConnectionString = $IotHubInfo.ConnectionString
     $IotHubName = $IotHubInfo.IotHubName
+
+	#Create the deviceData Table
+	Write-Host "Creating Table 'deviceData' on '$AzureFuncStorageName'"
+	$Ctx = New-AzureStorageContext -StorageAccountName $AzureFuncStorageName -StorageAccountKey $StorageAccountKey
+	New-AzureStorageTable -Name 'deviceData' -Context $Ctx
 
 	#Create the function.json file before the deployment of the function
 	Invoke-Expression ".\Step2DeployingFunction.ps1 '$ResourceGroupName' '$IotHubName' '$SiteFuncName' '$IotHubConsumerGroup'"	   

@@ -16,15 +16,24 @@ For More information see [Connect your device to your IoT hub using .NET](https:
 
 __Step2__
 
-Store IOT Hub message to Azure Storage
+Store IOT Hub message to Azure Storage using an Azure Function App
 
 1. Create the IOT Hub with template ARM (__Step2template.json__) and Powershell cmdlet
-2. Create an Azure Storage in order to store messages from IOT Hub
+2. Create an Azure Storage to store messages from IOT Hub
 3. Create an Azure Function App (Site)
 4. Create a __function.json__ files allowing to bind the Iot Hub event endpoint and Azure Storage endpoint
 5. Deploy the function to the Function App
 
 For More Information see [Save IoT hub messages that contain sensor data to your Azure table storage](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-store-data-in-azure-table-storage)
+__Step3__
+
+Visualize real-time sensor data that your IoT hub receives by running a web application that is hosted on a web app
+
+For more information [Visualize real-time sensor data from your Azure IoT hub by using the Web Apps feature of Azure App Service](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-live-data-visualization-in-web-apps)
+
+1. Create the IOT Hub with template ARM (__Step3template.json__) and Powershell cmdlet
+2. Create a web app 
+3. 
 
 To complete the demos, you need the following:
 
@@ -189,7 +198,7 @@ You can also use the [Azure Portal](https://portal.azure.com) in order to invoke
 
 
 
-To delete the demo execute the script: 
+To delete the Azure Resources execute the script: 
 ```json
 PS:>.\Clean.ps1 [RESOURCE GROUP NAME]
 ```

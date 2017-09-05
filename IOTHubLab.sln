@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step2", "Step2", "{CE15C146
 		DeploymentScript\Step2DisplayInfo.ps1 = DeploymentScript\Step2DisplayInfo.ps1
 		DeploymentScript\Step2Finish.ps1 = DeploymentScript\Step2Finish.ps1
 		DeploymentScript\Step2template.json = DeploymentScript\Step2template.json
+		DeploymentScript\Step2TestingFunction.ps1 = DeploymentScript\Step2TestingFunction.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step1", "Step1", "{9D391BFD-67CA-4949-A816-97BB05FEEFC2}"

@@ -73,7 +73,7 @@
     "iotHubName": "[concat(parameters('iothubNamePrefix'), parameters('uniqueStringPostFix'))]",
     "storageFunctionAccountName": "[concat(parameters('storageNameForFunctionPrefix'), parameters('uniqueStringPostFix'))]",
     "sitesFuncName": "[concat(parameters('funcNamePrefix'),parameters('uniqueStringPostFix'))]",
-    "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageFunctionAccountName'))]"
+    "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageFunctionAccountName'))]"    
   },
   "outputs": {
     "outputSiteFuncName": {
@@ -91,10 +91,14 @@
     "outputIotHubEventConnectionString": {
       "type": "string",
       "value": "[concat('Endpoint=',reference(resourceId('Microsoft.Devices/IoTHubs',variables('iotHubName'))).eventHubEndpoints.events.endpoint,';SharedAccessKeyName=iothubowner;SharedAccessKey=',listKeys(resourceId('Microsoft.Devices/IotHubs',variables('iotHubName')),'2016-02-03').value[0].primaryKey)]"
+    },   
+    "outputAzureFuncStorageName": {
+      "type": "string",
+      "value": "[variables('storageFunctionAccountName')]"
     },
-    "outputAlliotHubInfo": {
-      "value": "[reference(resourceId('Microsoft.Devices/IoTHubs',variables('iotHubName')))]",
-      "type": "object"
+    "outputStorageAccountKey": {
+      "type": "string",
+      "value": "[listKeys(variables('storageAccountid'),'2015-05-01-preview').key1]"
     }
 
 
