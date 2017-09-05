@@ -18,5 +18,5 @@
    $IotHubName = $IotHubInfo.IotHubName
 
    
-   Invoke-Expression ".\DisplayInfo.ps1 '$ResourceGroupName' '$IotHubName' '$DeviceId' '$DevicePrimaryKey' '$ConnectionString'"
+   Invoke-Expression ".\Step1DisplayInfo.ps1 '$ResourceGroupName' '$IotHubName' '$DeviceId' '$DevicePrimaryKey' '$ConnectionString'"
    

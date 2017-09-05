@@ -33,10 +33,7 @@
     $IotHubName = $IotHubInfo.IotHubName
 
 	#Create the function.json file before the deployment of the function
-	Invoke-Expression ".\Step2DeployingFunction.ps1 '$ResourceGroupName' '$IotHubName' '$SiteFuncName' '$IotHubConsumerGroup'"
-	
-   
-    Invoke-Expression ".\DisplayInfo.ps1 '$ResourceGroupName' '$IotHubName' '$DeviceId' '$DevicePrimaryKey' '$ConnectionString' '$IotHubConsumerGroup'"
-    Write-Host ""
-	Write-Host "Event Hub-compatible endpoint: '$IotHubEventCompatibleEndPoint'"
-	
+	Invoke-Expression ".\Step2DeployingFunction.ps1 '$ResourceGroupName' '$IotHubName' '$SiteFuncName' '$IotHubConsumerGroup'"	   
+    
+	Invoke-Expression ".\Step2DisplayInfo.ps1 '$ResourceGroupName' '$IotHubName' '$DeviceId' '$DevicePrimaryKey' '$ConnectionString' '$IotHubConsumerGroup' '$IotHubEventCompatibleEndPoint'"
+    

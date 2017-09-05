@@ -27,8 +27,7 @@ $FunctionBinding.bindings = @{
 								 name= 'eventHubMessages';
 								 direction='in';								 
 								 connection='EVENTS_IOTHUB_CONNECTION_STRING';
-								 cardinality='many';
-								 consumerGroup=''
+								 cardinality='many';								 
 							 },
 							 @{
 								 type='table';
@@ -42,28 +41,40 @@ $FunctionBinding.bindings = @{
 $FunctionBinding.bindings[0].path=$IotHubName
 $FunctionBinding.bindings[0].consumerGroup=$ConsumerGroup
 
-$json=ConvertTo-Json $FunctionBinding
-$json | Out-File '.\FunctionAsset\Step2CustomFunction\function.json'
+$JsonFunctionBinding=ConvertTo-Json $FunctionBinding
+$FunctionFilePath = '.\FunctionAsset\Step2CustomFunction\function.json'
+if (Test-path $FunctionFilePath)
+{
+    Remove-Item $FunctionFilePath
+}
+
+#Write the json to the file
+$JsonFunctionBinding | Out-File $FunctionFilePath
 
 Write-Host "Ziping the files..."
-$functionPath=".\FunctionAsset\"
-$outputPath=".\FunctionAsset\Step2CustomFunction.zip"
-$excluded = @(".vscode", ".gitignore", "appsettings.json", "secrets")
-$include = Get-ChildItem $functionPath -Exclude $excluded
-Compress-Archive -Path $include -Update -DestinationPath $outputPath
+$PathToZip=".\FunctionAsset\"
+$OutputPathZip=".\FunctionAsset\Step2CustomFunction.zip"
+if (Test-Path $OutputPathZip)
+{
+	Remove-Item -Path $OutputPathZip
+}
+$Excluded = @(".vscode", ".gitignore", "appsettings.json", "secrets")
+$Include = Get-ChildItem $PathToZip -Exclude $Excluded
+Compress-Archive -Path $Include -Update -DestinationPath $OutputPathZip
 
 Write-Host "Getting the user credentials..."
-$creds = Invoke-AzureRmResourceAction -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.Web/sites/config `
+$Creds = Invoke-AzureRmResourceAction -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.Web/sites/config `
             -ResourceName $FuncAppName/publishingcredentials -Action list -ApiVersion 2015-08-01 -Force
 
-$username = $creds.Properties.PublishingUserName
-$password = $creds.Properties.PublishingPassword
+$Username = $Creds.Properties.PublishingUserName
+$Password = $Creds.Properties.PublishingPassword
 
 Write-Host "Copying files to Function App site.."
-$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username,$password)))
-$apiUrl = "https://" + $FuncAppName+ ".scm.azurewebsites.net/api/zip/site/wwwroot"
-$apiUrl
-Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $outputPath -ContentType "multipart/form-data"
+$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $Username,$Password)))
+#Format the KUDU Api Url
+$ApiUrl = "https://" + $FuncAppName+ ".scm.azurewebsites.net/api/zip/site/wwwroot"
 
+Invoke-RestMethod -Uri $ApiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $OutputPathZip -ContentType "multipart/form-data"
 
+Write-Host "Deploying Function Succeeded"
 

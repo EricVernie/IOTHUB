@@ -10,27 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowershellCmdLet", "PowershellCmdLet\PowershellCmdLet.csproj", "{45CF5C1A-9B09-4172-B625-48166419DC2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeploymentScript", "DeploymentScript", "{C4E57E2B-37C2-4734-9D94-42B82AE12213}"
-	ProjectSection(SolutionItems) = preProject
-		DeploymentScript\AddDevice.ps1 = DeploymentScript\AddDevice.ps1
-		DeploymentScript\AddNewResourceGroupDeployment.ps1 = DeploymentScript\AddNewResourceGroupDeployment.ps1
-		DeploymentScript\ChangePrompt.ps1 = DeploymentScript\ChangePrompt.ps1
-		DeploymentScript\Clean.ps1 = DeploymentScript\Clean.ps1
-		DeploymentScript\CreateResourceGroup.ps1 = DeploymentScript\CreateResourceGroup.ps1
-		DeploymentScript\DisplayInfo.ps1 = DeploymentScript\DisplayInfo.ps1
-		DeploymentScript\ErrorHelper.ps1 = DeploymentScript\ErrorHelper.ps1
-		DeploymentScript\FunctionBindingsModel.cs = DeploymentScript\FunctionBindingsModel.cs
-		DeploymentScript\IOTHubInfo.cs = DeploymentScript\IOTHubInfo.cs
-		IotHubOutputInfo.cs = IotHubOutputInfo.cs
-		DeploymentScript\Login.ps1 = DeploymentScript\Login.ps1
-		DeploymentScript\RegisterResources.ps1 = DeploymentScript\RegisterResources.ps1
-		DeploymentScript\SetupCustomPowershellCmdlet.ps1 = DeploymentScript\SetupCustomPowershellCmdlet.ps1
-		DeploymentScript\StartDeployment.ps1 = DeploymentScript\StartDeployment.ps1
-		DeploymentScript\Step1Finish.ps1 = DeploymentScript\Step1Finish.ps1
-		DeploymentScript\Step1template.json = DeploymentScript\Step1template.json
-		DeploymentScript\Step2DeployingFunction.ps1 = DeploymentScript\Step2DeployingFunction.ps1
-		DeploymentScript\Step2Finish.ps1 = DeploymentScript\Step2Finish.ps1
-		DeploymentScript\Step2template.json = DeploymentScript\Step2template.json
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AA8AF3F-B1CA-4CE1-AA99-5E2715F0E0AA}"
 	ProjectSection(SolutionItems) = preProject
@@ -43,6 +22,42 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunction", "AzureFunct
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FunctionAsset", "FunctionAsset", "{886A35C2-1456-4936-B215-2AE012B52D13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step2", "Step2", "{CE15C146-C460-4167-86C0-C7AF77CFD280}"
+	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\Step2DeployingFunction.ps1 = DeploymentScript\Step2DeployingFunction.ps1
+		DeploymentScript\Step2DisplayInfo.ps1 = DeploymentScript\Step2DisplayInfo.ps1
+		DeploymentScript\Step2Finish.ps1 = DeploymentScript\Step2Finish.ps1
+		DeploymentScript\Step2template.json = DeploymentScript\Step2template.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step1", "Step1", "{9D391BFD-67CA-4949-A816-97BB05FEEFC2}"
+	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\Step1DisplayInfo.ps1 = DeploymentScript\Step1DisplayInfo.ps1
+		DeploymentScript\Step1Finish.ps1 = DeploymentScript\Step1Finish.ps1
+		DeploymentScript\Step1template.json = DeploymentScript\Step1template.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7F480337-5CE8-4BD4-8E25-F3774067FC0E}"
+	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\AddDevice.ps1 = DeploymentScript\AddDevice.ps1
+		DeploymentScript\AddNewResourceGroupDeployment.ps1 = DeploymentScript\AddNewResourceGroupDeployment.ps1
+		DeploymentScript\ChangePrompt.ps1 = DeploymentScript\ChangePrompt.ps1
+		DeploymentScript\Clean.ps1 = DeploymentScript\Clean.ps1
+		DeploymentScript\CreateResourceGroup.ps1 = DeploymentScript\CreateResourceGroup.ps1
+		DeploymentScript\ErrorHelper.ps1 = DeploymentScript\ErrorHelper.ps1
+		DeploymentScript\Login.ps1 = DeploymentScript\Login.ps1
+		DeploymentScript\RegisterResources.ps1 = DeploymentScript\RegisterResources.ps1
+		DeploymentScript\SetupCustomPowershellCmdlet.ps1 = DeploymentScript\SetupCustomPowershellCmdlet.ps1
+		DeploymentScript\StartDeployment.ps1 = DeploymentScript\StartDeployment.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataModel", "DataModel", "{84DF30EA-AA46-41C6-B7F3-3217AA0BCE30}"
+	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\FunctionBindingsModel.cs = DeploymentScript\FunctionBindingsModel.cs
+		DeploymentScript\IOTHubInfo.cs = DeploymentScript\IOTHubInfo.cs
+		IotHubOutputInfo.cs = IotHubOutputInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,9 +83,13 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{886A35C2-1456-4936-B215-2AE012B52D13} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
+		{CE15C146-C460-4167-86C0-C7AF77CFD280} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
+		{9D391BFD-67CA-4949-A816-97BB05FEEFC2} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
+		{7F480337-5CE8-4BD4-8E25-F3774067FC0E} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
+		{84DF30EA-AA46-41C6-B7F3-3217AA0BCE30} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
 		SolutionGuid = {0F214917-295E-424A-A7E8-009044DF43A6}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
 	EndGlobalSection
 EndGlobal

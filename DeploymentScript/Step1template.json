@@ -30,9 +30,9 @@
       "comments": "Generalized from resource: '/subscriptions/0e6b6c60-fcdf-46b6-90ab-a02f236df560/resourceGroups/evmsdntutoiothub-rg/providers/Microsoft.Devices/IotHubs/evmsdntutoiothub-iothub'.",
       "type": "Microsoft.Devices/IotHubs",
       "sku": {
-        "name": "F1",
-        "tier": "Free",
-        "capacity": 1
+        "name": "S1",
+        "tier": "Standard",
+        "capacity": 200
       },
       "name": "[variables('iotHubName')]",
       "apiVersion": "2016-02-03",

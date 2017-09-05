@@ -194,15 +194,6 @@ To delete the demo execute the script:
 PS:>.\Clean.ps1 [RESOURCE GROUP NAME]
 ```
 
-__Remarks__: The template use as a pricing and scale tier 'free' and 'F1' which allows only __1 unit__. So you can create only 1 IOT Hub.
-If you want to have more than one IOT Hub resources, edit the template.json and change the following in the resources section:
-```json
-"sku": {
-        "name": "S1",
-        "tier": "Standard",
-        "capacity": 200
-      },
-
 
 
 
