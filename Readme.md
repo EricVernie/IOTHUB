@@ -25,6 +25,7 @@ Store IOT Hub message to Azure Storage using an Azure Function App
 5. Deploy the function to the Function App
 
 For More Information see [Save IoT hub messages that contain sensor data to your Azure table storage](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-store-data-in-azure-table-storage)
+
 __Step3__
 
 Visualize real-time sensor data that your IoT hub receives by running a web application that is hosted on a web app
@@ -33,13 +34,14 @@ For more information [Visualize real-time sensor data from your Azure IoT hub by
 
 1. Create the IOT Hub with template ARM (__Step3template.json__) and Powershell cmdlet
 2. Create a web app 
-3. 
+3. Add the necessaries AppSettings keys for the web app to run
+4. Upload a web application to be hosted by the web app (see int the setuo section how to deploy the web app from github)
 
 To complete the demos, you need the following:
 
-* Visual Studio 2017.
+* Visual Studio 2017 if you want to build the solution
 * An active Azure account. (If you don't have an account, you can create a [free account](http://azure.microsoft.com/pricing/free-trial/) in just a couple of minutes.)
-* For Step3 [Download Git](https://www.git-scm.com/downloads)
+* For Step3 [Download Git](https://www.git-scm.com/downloads) if you did not have install VS2017
 
 
 # Solution
@@ -54,6 +56,7 @@ You will find the following projects:
 2. Receives message from cloud
 3. Responses to Direct Method (writeLine)
 
+__Note__: The binaries are located in .\SimulatedDevice\bin folder
 
 
 ## CloudToDevice
@@ -61,6 +64,7 @@ You will find the following projects:
 2. Sends a message to the Device
 3. Invokes a direct method (writeLine)
 
+__Note__: The binaries are located in .\CloudToDevice\bin folder
 
 ## PowershellCmdLet
 * Allows to create a device in your Iot Hub
@@ -112,7 +116,7 @@ PS:> Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
 
 # Create an Azure IOT Hub 
 
-* Open a Powershell console in admin mode
+* Open a Powershell console in administrator mode
 
 * Go to the __DeploymentScript__ folder, and enter the following command:
 ```json
@@ -121,6 +125,9 @@ PS:> .\StartDeployment.ps1 -Step Step1 -DeployedCustomPowershell O -Login O -Reg
 
 #Step2
 PS:> .\StartDeployment.ps1 -Step Step2 -DeployedCustomPowershell O -Login O -RegisterResourceProvider O -ResourceGroupName [RESOURCE GROUP NAME IOT HUB NAME]
+
+#Step3
+PS:> .\StartDeployment.ps1 -Step Step3 -DeployedCustomPowershell O -Login O -RegisterResourceProvider O -ResourceGroupName [RESOURCE GROUP NAME IOT HUB NAME]
 
 ```
 
@@ -131,7 +138,27 @@ PS:> .\StartDeployment.ps1 -Step Step2 -DeployedCustomPowershell O -Login O -Reg
 |Login | O or N | Allows to sign in to your Azure Subscription. __Note:__ If you stay in the current powershell session the next time you execute the script, no need to reenter your Azure credential, so, enter 'N' or whatever except 'O'
 |RegisterResourceProvider | O or N | Register the Resource Providers
 |ResourceGroupName|[YOUR RESOURCE GROUP NAME]||
-	
+
+__For Step3__, you need to do complete manualy the deployment of the web app from github:
+
+1. Sign in to [Azure Portal](http://portal.azure.com)
+2. Select the resource group.
+3. Select the Web App.
+4. In the Web app Select __Deployment Options__ > __Choose Source__ > __Local Git Repository, and the click __OK__.
+
+   __remark:__ This init a local git repository in your Web App.
+5. Click __Deployment Credentials__, create a user name and password to use to connect to the Git repository in Azure, and then click __Save__.
+6. Click __Overview__, and note the value of __Git clone url__.
+7. Open a command or terminal window on your local computer.
+8. Download the web app from GitHub, and upload it to Azure for the web app to host. To do so, run the following commands:
+```bash
+git clone https://github.com/Azure-Samples/web-apps-node-iot-hub-data-visualization.git
+cd web-apps-node-iot-hub-data-visualization
+git remote add webapp [Git clone URL](https://[username@[Web App Name].scm.azurewebsites.net:443/[Web App Name].git)
+git push webapp master:master
+``` 
+__Note:__ __[Git clone URL]__ is the URL of the Git repository found on the Overview page of the web app.
+
 
 ## Test Step1
 
@@ -157,14 +184,14 @@ You can also use the [Azure Portal](https://portal.azure.com) in order to send a
 * Select Device Explorer
 * Select the Device ID (i.e Device42 for example)
 
-Send a message
+__To Send a Message:__
 
 * Click on __Message to Device__
 * In the __Message Body__ enter your message
 * then click on __Send the Message__
 * Checked in the SimulatedDevice app console that your message is displayed
 
-Invoke a method
+__To Invoke a Method:__
 
 * Click on __Direct Method__
 * In the __Method Name__ box enter writeLine
@@ -185,9 +212,9 @@ PS:> .\SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
 
 You should see messages sent from your device to your IoT hub logged in the __deviceData__ table.
 
-You can also use the [Azure Portal](https://portal.azure.com) in order to invoke the azure function.
+You can also use the [Azure Portal](http://portal.azure.com) in order to invoke the azure function.
 
-* Sign in to the Azure Portal [Azure Portal](https://portal.azure.com)
+* Sign in to the Azure Portal [Azure Portal](http://portal.azure.com)
 * Select the Resource Group
 * Select the Function App 
 * Select the __Step2CustomFunction__
@@ -196,8 +223,15 @@ You can also use the [Azure Portal](https://portal.azure.com) in order to invoke
 * Check in Azure Storage Explorer 
   
 
+## Test Step3__
 
+Open the web app to see real-time temperature and humidity data from your IoT hub
 
+1. Launch the __SimulatedDevice__ console App to send telemetry
+```json
+PS:> .\SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
+```
+2. In any browser type http://[Web App Name].azurewebsites.net:
 
 To delete the Azure Resources execute the script: 
 ```json
