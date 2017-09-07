@@ -45,6 +45,7 @@ For more information [IoT remote monitoring and notifications with Azure Logic A
 
 1. In progress
 
+## Prerequisites
 
 To complete the demos, you need the following:
 
@@ -57,7 +58,7 @@ To complete the demos, you need the following:
 
 Clone the solution https://github.com/EricVernie/IOTHUB.git
 
-Open the IotHubLab solution in VS 2017 and build it.
+Open the IotHubLab solution in VS 2017 and build it. (If you don't have VS 2017 the binaries are available)
 You will find the following projects:
 
 ## SimulatedDevice 

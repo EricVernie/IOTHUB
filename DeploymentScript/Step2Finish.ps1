@@ -2,38 +2,31 @@
 	
 	[Parameter(Mandatory=$True)]
     [string]	
-    $resourceGroupName,
+    $ResourceGroupName,
 
     [Parameter(Mandatory=$True)]
     [string]	
-    $deviceId	
+    $DeviceId	
 
 	)
 	Write-Host "Step2 Finishing...."
-   
+    try
+	{
 	#Get the IOTHubName From the deployment OutPut
-	$ResourceGroupeDeploymentOutPut= Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName	
+	$ResourceGroupeDeploymentOutPut= Get-AzureRmResourceGroupDeployment -ResourceGroupName $ResourceGroupName -Name Step2template
     $IotHubConsumerGroup=$ResourceGroupeDeploymentOutPut.Outputs["outputConsumerGroup"].Value
-	
+	$IotHubName = $ResourceGroupeDeploymentOutPut.Outputs["outputIotHubName"].Value; 
+
 	$IotHubEventCompatibleEndPoint=$ResourceGroupeDeploymentOutPut.Outputs["outputIotHubEventConnectionString"].Value
 	$SiteFuncName = $ResourceGroupeDeploymentOutPut.Outputs["outputSiteFuncName"].Value
 	$AzureFuncStorageName =$ResourceGroupeDeploymentOutPut.Outputs["outputAzureFuncStorageName"].Value
 	$StorageAccountKey =$ResourceGroupeDeploymentOutPut.Outputs["outputStorageAccountKey"].Value
-
-	#Get the events endPoint By Powershell (Obsolete see the outputs template to do that)
-	#$IotHubOutputInfo=$ResourceGroupeDeployment.Outputs["iotHubInfo"]
-	#$EventHubEndPoints=$IotHubOutputInfo.Value["eventHubEndpoints"]
-	#$Event = $EventHubEndPoints["events"]
-	#$EndPointEvent=$Event | Where-Object Name -eq "endPoint"
-	#$EndPointEventValue=$EndPointEvent| Select -Property Value
-	#$EndPointEventValue.Value
 	
 	#Create the device on the IotHub
-	$IotHubInfo = Invoke-Expression ".\AddDevice.ps1 '$ResourceGroupName' '$DeviceId'" 
+	$IotHubInfo = Invoke-Expression ".\AddDevice.ps1 '$ResourceGroupName' '$IotHubName' '$DeviceId'" 
     $DevicePrimaryKey =$IotHubInfo.DevicePrimaryKey
     $ConnectionString = $IotHubInfo.ConnectionString
-    $IotHubName = $IotHubInfo.IotHubName
-
+    
 	#Create the deviceData Table
 	Write-Host "Creating Table 'deviceData' on '$AzureFuncStorageName'"
 	$Ctx = New-AzureStorageContext -StorageAccountName $AzureFuncStorageName -StorageAccountKey $StorageAccountKey
@@ -44,3 +37,9 @@
     
 	Invoke-Expression ".\Step2DisplayInfo.ps1 '$ResourceGroupName' '$IotHubName' '$DeviceId' '$DevicePrimaryKey' '$ConnectionString' '$IotHubConsumerGroup' '$IotHubEventCompatibleEndPoint'"
     
+	}
+	catch
+	{
+		.\ErrorHelper.ps1   "Step2Finish.ps1"	 $($_.Exception.Message)
+	}
+	

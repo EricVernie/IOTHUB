@@ -12,14 +12,18 @@
 	Write-Host "Step3 Finishing...."   
 	
 	
-   $IotHubInfo = Invoke-Expression ".\AddDevice.ps1 '$ResourceGroupName' '$DeviceId'" 
-   $DevicePrimaryKey =$IotHubInfo.DevicePrimaryKey
-   $ConnectionString = $IotHubInfo.ConnectionString
-   $IotHubName = $IotHubInfo.IotHubName
-
-   $ResourceGroupeDeploymentOutPut= Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName	
+   
+   $ResourceGroupeDeploymentOutPut= Get-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name Step3Template
    $IotHubConsumerGroup=$ResourceGroupeDeploymentOutPut.Outputs["outputConsumerGroup"].Value
    $WebAppName=$ResourceGroupeDeploymentOutPut.Outputs["outputWebAppName"].Value
+   $IotHubName = $ResourceGroupeDeploymentOutPut.Outputs["outputIotHubName"].Value; 
+   
+
+   $IotHubInfo = Invoke-Expression ".\AddDevice.ps1 '$ResourceGroupName' '$IotHubName' '$DeviceId'" 
+   $DevicePrimaryKey =$IotHubInfo.DevicePrimaryKey
+   $ConnectionString = $IotHubInfo.ConnectionString
+   
+
     Write-Host "The Setup is almost done"
 	Write-Host "BEFORE TO CONTINUE DO THE FOLLOWING:"
 	Write-Host "=============================================="

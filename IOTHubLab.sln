@@ -69,6 +69,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step3", "Step3", "{78A17B3B
 		DeploymentScript\Step3template.json = DeploymentScript\Step3template.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step4", "Step4", "{FF22D23D-44B8-42F2-A5B3-137E34A23F77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,9 +100,10 @@ Global
 		{7F480337-5CE8-4BD4-8E25-F3774067FC0E} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
 		{84DF30EA-AA46-41C6-B7F3-3217AA0BCE30} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
 		{78A17B3B-1726-47FC-88A6-6FB7BD304258} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
+		{FF22D23D-44B8-42F2-A5B3-137E34A23F77} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0F214917-295E-424A-A7E8-009044DF43A6}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
+		SolutionGuid = {0F214917-295E-424A-A7E8-009044DF43A6}
 	EndGlobalSection
 EndGlobal

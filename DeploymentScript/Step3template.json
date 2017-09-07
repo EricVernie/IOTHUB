@@ -58,7 +58,7 @@
   "variables": {
     "iotHubName": "[concat(parameters('iothubNamePrefix'), parameters('uniqueStringPostFix'))]"
   },
-  "outputs": {
+  "outputs": {   
     "outputWebAppName": {
       "type": "string",
       "value": "[parameters('webAppName')]"

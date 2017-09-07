@@ -6,5 +6,5 @@ param(
 	[string]
 	$Message
 	)
-    #Write-Host "From:" $source -ForegroundColor Red
+    Write-Host "From:" $source -ForegroundColor Red
 	Write-Host "Message:" $Message -ForegroundColor Red

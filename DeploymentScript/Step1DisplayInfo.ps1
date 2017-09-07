@@ -18,11 +18,7 @@
 
 	[Parameter(Mandatory=$True)]
     [string]	
-    $ConnectionString,
-	
-	
-    [string]	
-	 $IotHubConsumerGroup
+    $ConnectionString
 	)
     
 	Write-Host "IOTHub Name: '$IotHubName'"
@@ -34,4 +30,4 @@
 	
 	Write-Host "Verify Send/Received Telemetry"
 	Write-Host "1. Launch the console App to send telemetry: .\SimulatedDevice.exe '$IotHubName' '$DevicePrimaryKey' '$DeviceId'"	
-	Write-Host "2. Launch the console App to received telemetry:.\CloudTodevice.Exe '$ConnectionString'  '$DeviceId' '$IotHubConsumerGroup'"
+	Write-Host "2. Launch the console App to received telemetry:.\CloudTodevice.Exe '$ConnectionString'  '$DeviceId'"
