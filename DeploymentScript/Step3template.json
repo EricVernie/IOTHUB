@@ -6,6 +6,14 @@
       "defaultValue": "4b9c09be9bebf1bea8dac73bfd0e6cd9a37be9ea",
       "type": "string"
     },
+    "iotHubConsumerGroupName": {
+      "type": "string",
+      "minLength": 3,
+      "defaultValue": "Step3ConsumerGroup",
+      "metadata": {
+        "description": "Name of device-to-cloud consumer group to provision on the IoT Hub instance."
+      }
+    },
     "uniqueStringPostFix": {
       "type": "string",
       "maxLength": 50,

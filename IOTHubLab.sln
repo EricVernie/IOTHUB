@@ -70,6 +70,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step3", "Step3", "{78A17B3B
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step4", "Step4", "{FF22D23D-44B8-42F2-A5B3-137E34A23F77}"
+	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\Step4Finish.ps1 = DeploymentScript\Step4Finish.ps1
+		DeploymentScript\Step4template.json = DeploymentScript\Step4template.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StepAll", "StepAll", "{D700AF36-4236-4E53-8004-4D85DB40B4B4}"
+	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\StepAll.json = DeploymentScript\StepAll.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

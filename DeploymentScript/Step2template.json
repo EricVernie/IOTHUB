@@ -36,7 +36,7 @@
       "iotHubConsumerGroupName": {
         "type": "string",
         "minLength": 3,
-        "defaultValue": "ericvconsumergroup",
+        "defaultValue": "Step2ConsumerGroup",
         "metadata": {
           "description": "Name of device-to-cloud consumer group to provision on the IoT Hub instance."
         }
@@ -99,8 +99,6 @@
       "type": "string",
       "value": "[listKeys(variables('storageAccountid'),'2015-05-01-preview').key1]"
     }
-
-
   },
   "resources": [
     {

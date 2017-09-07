@@ -23,7 +23,7 @@ namespace ReadDeviceToCloudMessages
         {
             if (args.Length <=1 || args[0].ToLower().Equals("help"))
             {
-                Console.WriteLine("arguments: IOTHubConnectionString DeviceId ConsumerGroup (Optional");
+                Console.WriteLine("arguments: IOTHubConnectionString DeviceId ConsumerGroup (Optional)");
                 return;
             }
            

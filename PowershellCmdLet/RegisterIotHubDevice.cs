@@ -16,6 +16,8 @@
                 try
                 {
                     registryManager = RegistryManager.CreateFromConnectionString(connectionString);
+                    
+
                     device = await registryManager.AddDeviceAsync(new Device(deviceId));
                 }
                 catch (DeviceAlreadyExistsException)
