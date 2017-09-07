@@ -35,7 +35,16 @@ For more information [Visualize real-time sensor data from your Azure IoT hub by
 1. Create the IOT Hub with template ARM (__Step3template.json__) and Powershell cmdlet
 2. Create a web app 
 3. Add the necessaries AppSettings keys for the web app to run
-4. Upload a web application to be hosted by the web app (see int the setup section how to deploy the web app from github)
+4. Upload a web application to be hosted by the web app (see in the setup section how to deploy the web app from github)
+
+__Step4__
+
+IoT remote monitoring and notifications with Azure Logic Apps connecting your IoT hub and mailbox
+
+For more information [IoT remote monitoring and notifications with Azure Logic Apps connecting your IoT hub and mailbox](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-monitoring-notifications-with-azure-logic-apps)
+
+1. In progress
+
 
 To complete the demos, you need the following:
 
@@ -221,7 +230,7 @@ You can also use the [Azure Portal](http://portal.azure.com) in order to invoke 
 * Check in Azure Storage Explorer 
   
 
-## Test Step3__
+## Test Step3
 
 Open the web app to see real-time temperature and humidity data from your IoT hub
 
