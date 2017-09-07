@@ -35,13 +35,13 @@ For more information [Visualize real-time sensor data from your Azure IoT hub by
 1. Create the IOT Hub with template ARM (__Step3template.json__) and Powershell cmdlet
 2. Create a web app 
 3. Add the necessaries AppSettings keys for the web app to run
-4. Upload a web application to be hosted by the web app (see int the setuo section how to deploy the web app from github)
+4. Upload a web application to be hosted by the web app (see int the setup section how to deploy the web app from github)
 
 To complete the demos, you need the following:
 
 * Visual Studio 2017 if you want to build the solution
 * An active Azure account. (If you don't have an account, you can create a [free account](http://azure.microsoft.com/pricing/free-trial/) in just a couple of minutes.)
-* For Step3 [Download Git](https://www.git-scm.com/downloads) if you did not have install VS2017
+* For Step3 [Download Git](https://www.git-scm.com/downloads) if you have not have installed VS2017 with git tools
 
 
 # Solution
