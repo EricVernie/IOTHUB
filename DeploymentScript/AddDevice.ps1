@@ -31,7 +31,7 @@ param(
 		$DeviceInfo=Add-CreateIOTHubDevice -ConnectionString $ConnectionString  -Name $DeviceId
 		
 		$IotHubInfo.DevicePrimaryKey = $DeviceInfo.Authentication.SymmetricKey.PrimaryKey
-	
+		Write-Host "Creating IOT Hub Device succeeded"
 	}
 	catch
 	{

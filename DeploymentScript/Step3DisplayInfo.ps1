@@ -16,22 +16,15 @@
     [string]	
     $DevicePrimaryKey,
 
-	[Parameter(Mandatory=$True)]
-    [string]	
-    $ConnectionString,
-	
-	
-    [string]	
-	 $IotHubConsumerGroup
+	 
+	 [Parameter(Mandatory=$True)]
+	 [string]
+	 $WebAppName
 	)
     
-	Write-Host "IOTHub Name: '$IotHubName'"
+	Write-Host "To Test:"
 	Write-Host ""
-	Write-Host "IOT Hub ConnectionString: '$ConnectionString'"
-	Write-Host ""
-	Write-Host "Device PrimaryKey: '$DevicePrimaryKey'"
-	Write-Host ""
+	Write-Host "1. Launch the console App to send telemetry: .\SimulatedDevice.exe '$IotHubName' '$DevicePrimaryKey' '$DeviceId'"
+	$WebAppUrl = "http://$WebAppName.azurewebsites.net"
+	Write-Host "2. In any browser type the url to vizualize the telemetry: " + $WebAppUrl 
 	
-	Write-Host "Verify Send/Received Telemetry"
-	Write-Host "1. Launch the console App to send telemetry: .\SimulatedDevice.exe '$IotHubName' '$DevicePrimaryKey' '$DeviceId'"	
-	Write-Host "2. Launch the console App to received telemetry:.\CloudTodevice.Exe '$ConnectionString'  '$DeviceId' '$IotHubConsumerGroup'"

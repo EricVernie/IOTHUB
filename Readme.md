@@ -151,13 +151,11 @@ __For Step3__, you need to do complete manualy the deployment of the web app fro
 6. Click __Overview__, and note the value of __Git clone url__.
 7. Open a command or terminal window on your local computer.
 8. Download the web app from GitHub, and upload it to Azure for the web app to host. To do so, run the following commands:
-```bash
-git clone https://github.com/Azure-Samples/web-apps-node-iot-hub-data-visualization.git
-cd web-apps-node-iot-hub-data-visualization
-git remote add webapp [Git clone URL](https://[username@[Web App Name].scm.azurewebsites.net:443/[Web App Name].git)
-git push webapp master:master
-``` 
-__Note:__ __[Git clone URL]__ is the URL of the Git repository found on the Overview page of the web app.
+9. Execute the following Powershell Script:
+    ```json    
+        PS> .\Step3DeployWebApp.ps1 -GitCloneUrl [Your Git Clone Url]"
+    ``` 
+    __Note:__ __[Git clone URL]__ is the URL of the Git repository found on the Overview page of the web app.
 
 
 ## Test Step1
@@ -232,6 +230,7 @@ Open the web app to see real-time temperature and humidity data from your IoT hu
 PS:> .\SimulatedDevice.exe [IOT HUB NAME] [DEVICE KEY] [DEVICEID]
 ```
 2. In any browser type http://[Web App Name].azurewebsites.net:
+
 
 To delete the Azure Resources execute the script: 
 ```json

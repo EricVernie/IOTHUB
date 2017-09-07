@@ -69,6 +69,9 @@ $Creds = Invoke-AzureRmResourceAction -ResourceGroupName $ResourceGroupName -Res
 $Username = $Creds.Properties.PublishingUserName
 $Password = $Creds.Properties.PublishingPassword
 
+Write-Host "UserName: '$Username'"
+Write-Host $Password
+
 Write-Host "Copying files to Function App site.."
 $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $Username,$Password)))
 #Format the KUDU Api Url
@@ -77,4 +80,3 @@ $ApiUrl = "https://" + $FuncAppName+ ".scm.azurewebsites.net/api/zip/site/wwwroo
 Invoke-RestMethod -Uri $ApiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method PUT -InFile $OutputPathZip -ContentType "multipart/form-data"
 
 Write-Host "Deploying Function Succeeded"
-

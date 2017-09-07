@@ -42,7 +42,7 @@
         "description": "The value to use for starting the iothub account name."
       }
     },
-    "sites_webapptjaltnhvppgls_name": {
+    "webAppName": {
       "defaultValue": "[concat('webapp',parameters('uniqueStringPostFix'))]",
       "type": "string"
     },
@@ -51,7 +51,7 @@
       "type": "string"
     },
     "hostNameBindings_webapptjaltnhvppgls.azurewebsites.net_name": {
-      "defaultValue": "[concat(parameters('sites_webapptjaltnhvppgls_name'),'.azurewebsites.net')]",
+      "defaultValue": "[concat(parameters('webAppName'),'.azurewebsites.net')]",
       "type": "string"
     }
   },
@@ -59,9 +59,9 @@
     "iotHubName": "[concat(parameters('iothubNamePrefix'), parameters('uniqueStringPostFix'))]"
   },
   "outputs": {
-    "outputSiteFuncName": {
+    "outputWebAppName": {
       "type": "string",
-      "value": "[concat('func',parameters('uniqueStringPostFix'))]"
+      "value": "[parameters('webAppName')]"
     },
     "outputIotHubName": {
       "type": "string",
@@ -204,7 +204,7 @@
       "comments": "Create web site",
       "type": "Microsoft.Web/sites",
       "kind": "app",
-      "name": "[parameters('sites_webapptjaltnhvppgls_name')]",
+      "name": "[parameters('webAppName')]",
       "apiVersion": "2016-08-01",
       "location": "[resourceGroup().location]",
       "tags": {
@@ -215,7 +215,7 @@
         "enabled": true,
         "hostNameSslStates": [
           {
-            "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'),'.azurewebsites.net')]",
+            "name": "[concat(parameters('webAppName'),'.azurewebsites.net')]",
             "sslState": "Disabled",
             "virtualIP": null,
             "thumbprint": null,
@@ -223,7 +223,7 @@
             "hostType": "Standard"
           },
           {
-            "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'),'.scm.azurewebsites.net')]",
+            "name": "[concat(parameters('webAppName'),'.scm.azurewebsites.net')]",
             "sslState": "Disabled",
             "virtualIP": null,
             "thumbprint": null,
@@ -265,7 +265,7 @@
     {
       "comments": "Appsettings.",
       "type": "Microsoft.Web/sites/config",
-      "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'), '/', parameters('config_web_name'))]",
+      "name": "[concat(parameters('webAppName'), '/', parameters('config_web_name'))]",
       "apiVersion": "2016-08-01",
       "location": "[resourceGroup().location]",
       "tags": {
@@ -369,45 +369,23 @@
         "ipSecurityRestrictions": null
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('sites_webapptjaltnhvppgls_name'))]"
-      ]
-    },
-    {
-      "comments": "Deployments",
-      "type": "Microsoft.Web/sites/deployments",
-      "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'), '/', parameters('deployments_4b9c09be9bebf1bea8dac73bfd0e6cd9a37be9ea_name'))]",
-      "apiVersion": "2016-08-01",
-      "location": "North Europe",
-      "scale": null,
-      "properties": {
-        "id": "[parameters('deployments_4b9c09be9bebf1bea8dac73bfd0e6cd9a37be9ea_name')]",
-        "status": 4,
-        "author_email": "yuwzho@microsoft.com",
-        "author": "Yuwei Zhou",
-        "deployer": "ericvernie",
-        "message": "upgrade azure package version and make humidity data unnecessary (#3)\n\n",
-        "start_time": "2017-09-05T19:13:37.3842483Z",
-        "end_time": "2017-09-05T19:14:03.0946956Z",
-        "active": true
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('sites_webapptjaltnhvppgls_name'))]"
+        "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
       ]
     },
     {
       "comments": "HostNameBindings",
       "type": "Microsoft.Web/sites/hostNameBindings",
-      "name": "[concat(parameters('sites_webapptjaltnhvppgls_name'), '/', parameters('hostNameBindings_webapptjaltnhvppgls.azurewebsites.net_name'))]",
+      "name": "[concat(parameters('webAppName'), '/', parameters('hostNameBindings_webapptjaltnhvppgls.azurewebsites.net_name'))]",
       "apiVersion": "2016-08-01",
       "location": "[resourceGroup().location]",
       "scale": null,
       "properties": {
-        "siteName": "[parameters('sites_webapptjaltnhvppgls_name')]",
+        "siteName": "[parameters('webAppName')]",
         "domainId": null,
         "hostNameType": "Verified"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('sites_webapptjaltnhvppgls_name'))]"
+        "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
       ]
     }
   ]
