@@ -6,7 +6,7 @@ __Step1__
 
 Simulate device on your PC 
 
-1. Create the IOT Hub with template ARM (__Step1template.json__) and Powershell cmdlet
+1. Create the IOT Hub withtemplate ARM (__Step1template.json__) and Powershell cmdlet
 2. Simulate a device which send telemetry to the cloud (D2C)
 3. Read the telemetry from the Device
 4. Send message to the device (C2D)
