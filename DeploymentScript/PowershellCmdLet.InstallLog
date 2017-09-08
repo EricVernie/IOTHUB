@@ -131,3 +131,42 @@ Les paramètres affectés sont :
    logtoconsole = 
    assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
    logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Installation de l'assembly 'C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Restauration de l'assembly 'C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Une exception s'est produite lors de la phase de restauration du programme d'installation PowershellCmdLet.PowershellCmdLet.CreateIOTHubDeviceSnapIn.
+System.UnauthorizedAccessException: L'accès à la clé de Registre 'HKEY_LOCAL_MACHINE\Software\Microsoft\PowerShell\1\PowerShellSnapIns' est refusé.
+Une exception s'est produite lors de la phase de restauration de l'installation. Cette exception est ignorée et la restauration se poursuit. Cependant, l'ordinateur ne sera pas totalement restauré à son état initial à la fin de la restauration.
+Installation de l'assembly 'C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Restauration de l'assembly 'C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Une exception s'est produite lors de la phase de restauration du programme d'installation PowershellCmdLet.PowershellCmdLet.CreateIOTHubDeviceSnapIn.
+System.UnauthorizedAccessException: L'accès à la clé de Registre 'HKEY_LOCAL_MACHINE\Software\Microsoft\PowerShell\1\PowerShellSnapIns' est refusé.
+Une exception s'est produite lors de la phase de restauration de l'installation. Cette exception est ignorée et la restauration se poursuit. Cependant, l'ordinateur ne sera pas totalement restauré à son état initial à la fin de la restauration.
+Installation de l'assembly 'C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Restauration de l'assembly 'C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   assemblypath = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.dll
+   logfile = C:\repos\IOTHUB\DeploymentScript\PowershellCmdLet.InstallLog
+Une exception s'est produite lors de la phase de restauration du programme d'installation PowershellCmdLet.PowershellCmdLet.CreateIOTHubDeviceSnapIn.
+System.UnauthorizedAccessException: L'accès à la clé de Registre 'HKEY_LOCAL_MACHINE\Software\Microsoft\PowerShell\1\PowerShellSnapIns' est refusé.
+Une exception s'est produite lors de la phase de restauration de l'installation. Cette exception est ignorée et la restauration se poursuit. Cependant, l'ordinateur ne sera pas totalement restauré à son état initial à la fin de la restauration.

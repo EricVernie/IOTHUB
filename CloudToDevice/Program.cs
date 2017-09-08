@@ -146,8 +146,8 @@ namespace ReadDeviceToCloudMessages
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("#############Message Recu de l appareil#######################");
                     string data = Encoding.UTF8.GetString(eventData.GetBytes());
-                    var alert = eventData.Properties["temperatureAlert"];
-                    Console.WriteLine($"Alerte Temperature : {alert}");
+                    //var alert = eventData.Properties["temperatureAlert"];
+                    //Console.WriteLine($"Alerte Temperature : {alert}");
                     Console.WriteLine("Message recu. Partition: {0} Data: '{1}'", partition, data);
                     Console.WriteLine("##############################################################");
                     Console.ResetColor();

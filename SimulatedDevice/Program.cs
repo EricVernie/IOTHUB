@@ -19,8 +19,7 @@ namespace SimulatedDevice
                 Console.WriteLine("arguments: IOTHubName DevicePrimaryKey DeviceId");
                 return;
             }
-            
-            
+                        
             try
             {
                 string deviceKey = args[1];

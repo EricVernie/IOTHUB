@@ -69,6 +69,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step3", "Step3", "{78A17B3B
 		DeploymentScript\Step3template.json = DeploymentScript\Step3template.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Step1b", "Step1b", "{39407A5B-DF7A-4577-87FE-5F0012B04617}"
+	ProjectSection(SolutionItems) = preProject
+		DeploymentScript\Step1bFinish.ps1 = DeploymentScript\Step1bFinish.ps1
+		DeploymentScript\Step1btemplate.json = DeploymentScript\Step1btemplate.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionAppSimulatedDevice", "FunctionAppSimulatedDevice\FunctionAppSimulatedDevice.csproj", "{428B2CF5-88C4-4375-89AB-A1294DDF0CA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +95,10 @@ Global
 		{45CF5C1A-9B09-4172-B625-48166419DC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CF5C1A-9B09-4172-B625-48166419DC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CF5C1A-9B09-4172-B625-48166419DC2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{428B2CF5-88C4-4375-89AB-A1294DDF0CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{428B2CF5-88C4-4375-89AB-A1294DDF0CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{428B2CF5-88C4-4375-89AB-A1294DDF0CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{428B2CF5-88C4-4375-89AB-A1294DDF0CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,9 +110,10 @@ Global
 		{7F480337-5CE8-4BD4-8E25-F3774067FC0E} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
 		{84DF30EA-AA46-41C6-B7F3-3217AA0BCE30} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
 		{78A17B3B-1726-47FC-88A6-6FB7BD304258} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
+		{39407A5B-DF7A-4577-87FE-5F0012B04617} = {C4E57E2B-37C2-4734-9D94-42B82AE12213}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
 		SolutionGuid = {0F214917-295E-424A-A7E8-009044DF43A6}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
 	EndGlobalSection
 EndGlobal
